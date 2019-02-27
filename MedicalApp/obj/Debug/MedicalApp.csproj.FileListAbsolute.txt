@@ -79,3 +79,4 @@ C:\Users\Public-pc\Documents\MEGAsync\MisDesarrrollos\mas\MedicalApp\MedicalApp\
 C:\Users\Public-pc\Documents\MEGAsync\MisDesarrrollos\mas\MedicalApp\MedicalApp\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\Public-pc\Documents\MEGAsync\MisDesarrrollos\mas\MedicalApp\MedicalApp\obj\Debug\MedicalApp.dll
 C:\Users\Public-pc\Documents\MEGAsync\MisDesarrrollos\mas\MedicalApp\MedicalApp\obj\Debug\MedicalApp.pdb
+C:\Users\Public-pc\Documents\MEGAsync\MisDesarrrollos\mas\MedicalApp\MedicalApp\obj\Debug\MedicalApp.csprojResolveAssemblyReference.cache
