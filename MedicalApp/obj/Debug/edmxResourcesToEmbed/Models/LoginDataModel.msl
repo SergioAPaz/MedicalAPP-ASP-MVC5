@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="MedicalAppModelStoreContainer" CdmEntityContainer="MedicalAppEntities1">
+    <EntitySetMapping Name="CT_Doctores">
+      <EntityTypeMapping TypeName="MedicalAppModel.CT_Doctores">
+        <MappingFragment StoreEntitySet="CT_Doctores">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CT_Roles">
+      <EntityTypeMapping TypeName="MedicalAppModel.CT_Roles">
+        <MappingFragment StoreEntitySet="CT_Roles">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CT_Users">
+      <EntityTypeMapping TypeName="MedicalAppModel.CT_Users">
+        <MappingFragment StoreEntitySet="CT_Users">
+          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="Rol" ColumnName="Rol" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="BornDate" ColumnName="BornDate" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>
