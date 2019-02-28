@@ -5,9 +5,10 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="03a185343f134b06b542d2d560cef2b9" Name="Diagram1">
-        <EntityTypeShape EntityType="MedicalAppModel.CT_Doctores" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MedicalAppModel.CT_Roles" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="MedicalAppModel.CT_Users" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="MedicalAppModel.CT_Doctores" Width="1.5" PointX="0.75" PointY="4.75" />
+        <EntityTypeShape EntityType="MedicalAppModel.CT_Roles" Width="1.5" PointX="0.75" PointY="1.375" />
+        <EntityTypeShape EntityType="MedicalAppModel.CT_Users" Width="1.5" PointX="3" PointY="1" />
+        <AssociationConnector Association="MedicalAppModel.FK_CT_Users_CT_Roles" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

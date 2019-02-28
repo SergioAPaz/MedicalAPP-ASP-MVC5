@@ -37,6 +37,7 @@ namespace MedicalApp.Controllers
                 else
                 {
                     Session["User"] = userDetails.UserName;
+
                     return RedirectToAction("Index", "Home");
                 }
 

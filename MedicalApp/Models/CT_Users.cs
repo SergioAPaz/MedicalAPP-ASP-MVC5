@@ -21,5 +21,7 @@ namespace MedicalApp.Models
         public string BornDate { get; set; }
         public string Password { get; set; }
         public Nullable<System.DateTime> LastLogin { get; set; }
+    
+        public virtual CT_Roles CT_Roles { get; set; }
     }
 }

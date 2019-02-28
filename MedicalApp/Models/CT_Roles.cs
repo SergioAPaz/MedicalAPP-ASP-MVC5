@@ -14,7 +14,16 @@ namespace MedicalApp.Models
     
     public partial class CT_Roles
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CT_Roles()
+        {
+            this.CT_Users = new HashSet<CT_Users>();
+        }
+    
         public int id { get; set; }
         public string Role { get; set; }
+    
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CT_Users> CT_Users { get; set; }
     }
 }

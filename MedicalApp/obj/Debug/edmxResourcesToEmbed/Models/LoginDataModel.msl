@@ -4,29 +4,29 @@
     <EntitySetMapping Name="CT_Doctores">
       <EntityTypeMapping TypeName="MedicalAppModel.CT_Doctores">
         <MappingFragment StoreEntitySet="CT_Doctores">
-          <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CT_Roles">
       <EntityTypeMapping TypeName="MedicalAppModel.CT_Roles">
         <MappingFragment StoreEntitySet="CT_Roles">
-          <ScalarProperty Name="id" ColumnName="id" />
           <ScalarProperty Name="Role" ColumnName="Role" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="CT_Users">
       <EntityTypeMapping TypeName="MedicalAppModel.CT_Users">
         <MappingFragment StoreEntitySet="CT_Users">
-          <ScalarProperty Name="id" ColumnName="id" />
-          <ScalarProperty Name="UserName" ColumnName="UserName" />
-          <ScalarProperty Name="Rol" ColumnName="Rol" />
-          <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="BornDate" ColumnName="BornDate" />
-          <ScalarProperty Name="Password" ColumnName="Password" />
           <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="BornDate" ColumnName="BornDate" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Rol" ColumnName="Rol" />
+          <ScalarProperty Name="UserName" ColumnName="UserName" />
+          <ScalarProperty Name="id" ColumnName="id" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

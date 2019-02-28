@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="MedicalAppModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="MedicalAppModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CT_Doctores">
           <Key>
             <PropertyRef Name="id" />
@@ -31,16 +31,40 @@
           <Property Name="Password" Type="varchar" MaxLength="50" />
           <Property Name="LastLogin" Type="date" />
         </EntityType>
+        <Association Name="FK_CT_Users_CT_Roles">
+          <End Role="CT_Roles" Type="Self.CT_Roles" Multiplicity="0..1" />
+          <End Role="CT_Users" Type="Self.CT_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CT_Roles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CT_Users">
+              <PropertyRef Name="Rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="MedicalAppModelStoreContainer">
           <EntitySet Name="CT_Doctores" EntityType="Self.CT_Doctores" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CT_Roles" EntityType="Self.CT_Roles" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="CT_Users" EntityType="Self.CT_Users" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CT_Users_CT_Roles" Association="Self.FK_CT_Users_CT_Roles">
+            <End Role="CT_Roles" EntitySet="CT_Roles" />
+            <End Role="CT_Users" EntitySet="CT_Users" />
+          </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="MedicalAppModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityContainer Name="MedicalAppEntities1" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CT_Doctores" EntityType="MedicalAppModel.CT_Doctores" />
+          <EntitySet Name="CT_Roles" EntityType="MedicalAppModel.CT_Roles" />
+          <EntitySet Name="CT_Users" EntityType="MedicalAppModel.CT_Users" />
+          <AssociationSet Name="FK_CT_Users_CT_Roles" Association="MedicalAppModel.FK_CT_Users_CT_Roles">
+            <End Role="CT_Roles" EntitySet="CT_Roles" />
+            <End Role="CT_Users" EntitySet="CT_Users" />
+          </AssociationSet>
+        </EntityContainer>
         <EntityType Name="CT_Doctores">
           <Key>
             <PropertyRef Name="id" />
@@ -53,7 +77,8 @@
             <PropertyRef Name="id" />
           </Key>
           <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="Role" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="CT_Users" Relationship="MedicalAppModel.FK_CT_Users_CT_Roles" FromRole="CT_Roles" ToRole="CT_Users" />
         </EntityType>
         <EntityType Name="CT_Users">
           <Key>
@@ -66,12 +91,20 @@
           <Property Name="BornDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="LastLogin" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="CT_Roles" Relationship="MedicalAppModel.FK_CT_Users_CT_Roles" FromRole="CT_Users" ToRole="CT_Roles" />
         </EntityType>
-        <EntityContainer Name="MedicalAppEntities1" annotation:LazyLoadingEnabled="true">
-          <EntitySet Name="CT_Doctores" EntityType="Self.CT_Doctores" />
-          <EntitySet Name="CT_Roles" EntityType="Self.CT_Roles" />
-          <EntitySet Name="CT_Users" EntityType="Self.CT_Users" />
-        </EntityContainer>
+        <Association Name="FK_CT_Users_CT_Roles">
+          <End Type="MedicalAppModel.CT_Roles" Role="CT_Roles" Multiplicity="0..1" />
+          <End Type="MedicalAppModel.CT_Users" Role="CT_Users" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CT_Roles">
+              <PropertyRef Name="id" />
+            </Principal>
+            <Dependent Role="CT_Users">
+              <PropertyRef Name="Rol" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -81,29 +114,29 @@
           <EntitySetMapping Name="CT_Doctores">
             <EntityTypeMapping TypeName="MedicalAppModel.CT_Doctores">
               <MappingFragment StoreEntitySet="CT_Doctores">
-                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CT_Roles">
             <EntityTypeMapping TypeName="MedicalAppModel.CT_Roles">
               <MappingFragment StoreEntitySet="CT_Roles">
-                <ScalarProperty Name="id" ColumnName="id" />
                 <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
           <EntitySetMapping Name="CT_Users">
             <EntityTypeMapping TypeName="MedicalAppModel.CT_Users">
               <MappingFragment StoreEntitySet="CT_Users">
-                <ScalarProperty Name="id" ColumnName="id" />
-                <ScalarProperty Name="UserName" ColumnName="UserName" />
-                <ScalarProperty Name="Rol" ColumnName="Rol" />
-                <ScalarProperty Name="Name" ColumnName="Name" />
-                <ScalarProperty Name="BornDate" ColumnName="BornDate" />
-                <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="LastLogin" ColumnName="LastLogin" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="BornDate" ColumnName="BornDate" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Rol" ColumnName="Rol" />
+                <ScalarProperty Name="UserName" ColumnName="UserName" />
+                <ScalarProperty Name="id" ColumnName="id" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

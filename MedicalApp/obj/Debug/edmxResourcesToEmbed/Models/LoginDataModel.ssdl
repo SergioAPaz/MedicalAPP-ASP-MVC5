@@ -26,9 +26,25 @@
     <Property Name="Password" Type="varchar" MaxLength="50" />
     <Property Name="LastLogin" Type="date" />
   </EntityType>
+  <Association Name="FK_CT_Users_CT_Roles">
+    <End Role="CT_Roles" Type="Self.CT_Roles" Multiplicity="0..1" />
+    <End Role="CT_Users" Type="Self.CT_Users" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CT_Roles">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="CT_Users">
+        <PropertyRef Name="Rol" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="MedicalAppModelStoreContainer">
     <EntitySet Name="CT_Doctores" EntityType="Self.CT_Doctores" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CT_Roles" EntityType="Self.CT_Roles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CT_Users" EntityType="Self.CT_Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_CT_Users_CT_Roles" Association="Self.FK_CT_Users_CT_Roles">
+      <End Role="CT_Roles" EntitySet="CT_Roles" />
+      <End Role="CT_Users" EntitySet="CT_Users" />
+    </AssociationSet>
   </EntityContainer>
 </Schema>
