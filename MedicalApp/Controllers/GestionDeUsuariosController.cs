@@ -48,14 +48,21 @@ namespace MedicalApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,UserName,Rol,Name,BornDate,Password,LastLogin")] CT_Users cT_Users)
+        public ActionResult Create([Bind(Include = "id,UserName,Rol,Name,BornDate,Password,LastLogin")] CT_Users cT_Users,int id)
         {
-            if (ModelState.IsValid)
+
+            CT_Users cT_Userss = db.CT_Users.Find(id);
+            if (cT_Userss == null)
+            {
+                return HttpNotFound();
+            }
+            else
             {
                 db.CT_Users.Add(cT_Users);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+         
 
             ViewBag.Rol = new SelectList(db.CT_Roles, "id", "Role", cT_Users.Rol);
             return View(cT_Users);

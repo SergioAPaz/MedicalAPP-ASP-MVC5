@@ -12,6 +12,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>@ViewBag.Title - My ASP.NET Application</title>
     @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
     @*@Scripts.Render("~/bundles/modernizr")*@
     <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 </head>
@@ -63,6 +65,8 @@
     <div class="container"  style="background-color: #fafafa; max-height: 54.5%; min-height: 54.5%; border: 1px solid  #9e9e9e; border-radius: 7px;">
         @RenderBody()
        
+
+        <br />
     </div>
 
     @*<div class="navbar navbar-expand-sm bg-dark navbar-dark">
@@ -87,8 +91,7 @@
     </div>
    *@
 
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
+  
     @RenderSection("scripts", required: false)
 </body>
 </html>
