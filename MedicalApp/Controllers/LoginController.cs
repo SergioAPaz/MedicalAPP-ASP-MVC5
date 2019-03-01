@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MedicalApp.Models;
+using MedicalApp.Models.OwnModels;
 
 namespace MedicalApp.Controllers
 {
@@ -16,22 +17,25 @@ namespace MedicalApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult Authorize(MedicalApp.Models.CT_Users userModel)
+        public ActionResult Authorize(MedicalApp.Models.dbOwnModels.CT_UsersCE userModel)
         {
             using (MedicalAppEntities1 db = new MedicalAppEntities1())
             {
                 var userDetails = db.CT_Users.Where(x => x.UserName == userModel.UserName && x.Password == userModel.Password).FirstOrDefault();
                 if (userDetails == null)
                 {
+
                     TempData["ShowModal"] = 1;
-                   MedicalApp.Models.OwnModels.LoginModels rec = new MedicalApp.Models.OwnModels.LoginModels
-                   {
+                    LoginModels rec = new LoginModels
+                    {
                         msgColorTitle = "#e57373",
-                        msgTitle = "Error",
-                        msgBody = "Nombre de usuario incorrecto."
+                        msgTitle = "Incorrect Credentials",
+                        msgBody = "Wrong username or password."
 
                     };
-                  
+                    ViewBag.Message = rec;
+
+
                     return View("Index", userModel);
                 }
                 else

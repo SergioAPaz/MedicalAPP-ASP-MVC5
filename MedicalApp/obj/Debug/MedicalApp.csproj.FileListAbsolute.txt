@@ -1,15 +1,15 @@
+C:\Users\Public-pc\Documents\MEGAsync\MisDesarrrollos\mas\MedicalApp\MedicalApp\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+C:\Users\Public-pc\Documents\MEGAsync\MisDesarrrollos\mas\MedicalApp\MedicalApp\bin\roslyn\Microsoft.CodeAnalysis.dll
+C:\Users\Public-pc\Documents\MEGAsync\MisDesarrrollos\mas\MedicalApp\MedicalApp\bin\roslyn\System.Collections.Immutable.dll
+C:\Users\Public-pc\Documents\MEGAsync\MisDesarrrollos\mas\MedicalApp\MedicalApp\bin\roslyn\System.Reflection.Metadata.dll
+C:\Users\Public-pc\Documents\MEGAsync\MisDesarrrollos\mas\MedicalApp\MedicalApp\bin\roslyn\VBCSCompiler.exe
 C:\Users\Public-pc\Documents\MEGAsync\MisDesarrrollos\mas\MedicalApp\MedicalApp\bin\ApplicationInsights.config
 C:\Users\Public-pc\Documents\MEGAsync\MisDesarrrollos\mas\MedicalApp\MedicalApp\bin\roslyn\csc.exe
 C:\Users\Public-pc\Documents\MEGAsync\MisDesarrrollos\mas\MedicalApp\MedicalApp\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
-C:\Users\Public-pc\Documents\MEGAsync\MisDesarrrollos\mas\MedicalApp\MedicalApp\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
-C:\Users\Public-pc\Documents\MEGAsync\MisDesarrrollos\mas\MedicalApp\MedicalApp\bin\roslyn\Microsoft.CodeAnalysis.dll
 C:\Users\Public-pc\Documents\MEGAsync\MisDesarrrollos\mas\MedicalApp\MedicalApp\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
 C:\Users\Public-pc\Documents\MEGAsync\MisDesarrrollos\mas\MedicalApp\MedicalApp\bin\roslyn\Microsoft.CSharp.Core.targets
 C:\Users\Public-pc\Documents\MEGAsync\MisDesarrrollos\mas\MedicalApp\MedicalApp\bin\roslyn\Microsoft.VisualBasic.Core.targets
-C:\Users\Public-pc\Documents\MEGAsync\MisDesarrrollos\mas\MedicalApp\MedicalApp\bin\roslyn\System.Collections.Immutable.dll
-C:\Users\Public-pc\Documents\MEGAsync\MisDesarrrollos\mas\MedicalApp\MedicalApp\bin\roslyn\System.Reflection.Metadata.dll
 C:\Users\Public-pc\Documents\MEGAsync\MisDesarrrollos\mas\MedicalApp\MedicalApp\bin\roslyn\vbc.exe
-C:\Users\Public-pc\Documents\MEGAsync\MisDesarrrollos\mas\MedicalApp\MedicalApp\bin\roslyn\VBCSCompiler.exe
 C:\Users\Public-pc\Documents\MEGAsync\MisDesarrrollos\mas\MedicalApp\MedicalApp\bin\roslyn\VBCSCompiler.exe.config
 C:\Users\Public-pc\Documents\MEGAsync\MisDesarrrollos\mas\MedicalApp\MedicalApp\bin\MedicalApp.dll.config
 C:\Users\Public-pc\Documents\MEGAsync\MisDesarrrollos\mas\MedicalApp\MedicalApp\bin\MedicalApp.dll
@@ -79,4 +79,3 @@ C:\Users\Public-pc\Documents\MEGAsync\MisDesarrrollos\mas\MedicalApp\MedicalApp\
 C:\Users\Public-pc\Documents\MEGAsync\MisDesarrrollos\mas\MedicalApp\MedicalApp\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\Public-pc\Documents\MEGAsync\MisDesarrrollos\mas\MedicalApp\MedicalApp\obj\Debug\MedicalApp.dll
 C:\Users\Public-pc\Documents\MEGAsync\MisDesarrrollos\mas\MedicalApp\MedicalApp\obj\Debug\MedicalApp.pdb
-C:\Users\Public-pc\Documents\MEGAsync\MisDesarrrollos\mas\MedicalApp\MedicalApp\obj\Debug\MedicalApp.csprojResolveAssemblyReference.cache

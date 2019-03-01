@@ -5,11 +5,10 @@
     @Scripts.Render("~/bundles/bootstrap")
     @Styles.Render("~/Content/css2")
     Layout = null;
+   
 
-
-
-    
 }
+ 
 
 <!DOCTYPE html>
 
@@ -30,7 +29,7 @@
                    
                     <br />
                     <br />
-
+                    
                    @using (Html.BeginForm("Authorize", "Login", FormMethod.Post))
                    {
                        <br />
@@ -59,3 +58,51 @@
     </div>
 </body>
 </html>
+
+
+
+
+@{
+    string Title = "";
+    string Body = "";
+    string colorTitle = "";
+    if (TempData["ShowModal"] != null)
+    {
+        if (ViewBag.Message != null)
+        {
+            var data = ViewBag.Message;
+            colorTitle = data.msgColorTitle;
+            Title = data.msgTitle;
+            Body = data.msgBody;
+            <script>openModal27();</script>
+        }
+
+    }
+}
+<script type='text/javascript'>
+    function openModal27() {
+        $('#myModal').modal('show');
+    }
+</script>
+<div class="modal fade" id="myModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header"  style="background-color:@colorTitle;color:white">
+                <h4 class="modal-title">@Title</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+              @Body
+            </div>
+            
+        </div>
+    </div>
+</div>
+@{
+    if (ViewBag.Message != null)
+    {
+        <script type="text/javascript">
+            openModal27();
+        </script>
+    }
+}
