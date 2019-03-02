@@ -63,6 +63,12 @@ namespace MedicalApp.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    string Key = "1234567890abcdef"; //key must have 16 chars, other wise you may get error "key size in not valid".
+                    string Password2 = cT_Users.Password;
+                    EncryptionModel Crypt = new EncryptionModel();
+                    string EncryptedPassword = (string)Crypt.Crypt(CryptType.ENCRYPT, CryptTechnique.RIJ, Password2, Key);
+
+                    cT_Users.Password = EncryptedPassword;
                     db.CT_Users.Add(cT_Users);
                     db.SaveChanges();
                     return RedirectToAction("Index");

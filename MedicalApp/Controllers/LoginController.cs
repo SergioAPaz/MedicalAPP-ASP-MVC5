@@ -21,7 +21,13 @@ namespace MedicalApp.Controllers
         {
             using (MedicalAppEntities1 db = new MedicalAppEntities1())
             {
-                var userDetails = db.CT_Users.Where(x => x.UserName == userModel.UserName && x.Password == userModel.Password).FirstOrDefault();
+                string Key = "1234567890abcdef"; //key must have 16 chars, other wise you may get error "key size in not valid".
+                string Password2 = userModel.Password;
+                EncryptionModel Crypt = new EncryptionModel();
+                string EncryptedPassword = (string)Crypt.Crypt(CryptType.ENCRYPT, CryptTechnique.RIJ, Password2, Key);
+
+                
+                var userDetails = db.CT_Users.Where(x => x.UserName == userModel.UserName && x.Password == EncryptedPassword).FirstOrDefault();
                 if (userDetails == null)
                 {
 
