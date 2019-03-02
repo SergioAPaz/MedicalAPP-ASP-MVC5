@@ -17,5 +17,8 @@ namespace MedicalApp.Models.dbOwnModels
         [DataType(DataType.Password)]
         public string Password { get; set; }
         public Nullable<System.DateTime> LastLogin { get; set; }
+
+
+        public virtual CT_Roles CT_Roles { get; set; }
     }
 }

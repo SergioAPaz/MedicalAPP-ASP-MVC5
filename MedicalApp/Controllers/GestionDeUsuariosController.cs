@@ -7,6 +7,8 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using MedicalApp.Models;
+using MedicalApp.Models.dbOwnModels;
+using MedicalApp.Models.OwnModels;
 
 namespace MedicalApp.Controllers
 {
@@ -48,34 +50,26 @@ namespace MedicalApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create( MedicalApp.Models.dbOwnModels.CT_UsersCE model, [Bind(Include = "id,UserName,Rol,Name,BornDate,Password,LastLogin")] CT_Users cT_Users)
+        public ActionResult Create([Bind(Include = "id,UserName,Rol,Name,BornDate,Password,LastLogin")] CT_Users cT_Users)
         {
-
-            if (model.UserName == null)
+            //VALIDA PRIMERO SI EL USUARIO EXISTE YA EN LA DB ANTES DE SALVAR Y EN CASO DE QUE YA EXISTA MUESTRA UN MENSAJE
+            bool isViewNameInvalid = db.CT_Users.Any(v => v.UserName == cT_Users.UserName);
+            if (isViewNameInvalid)
             {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                TempData["ShowModal1"] = 1;   
+                return RedirectToAction("Index", cT_Users);
             }
-            CT_Users cT_Users0 = db.CT_Users.Find(model.UserName);
-            if (cT_Users0 != null)
+            else
             {
-                CT_Users cT_Userss = db.CT_Users.Find(id);
-                if (cT_Userss == null)
-                {
-                    return HttpNotFound();
-                }
-                else
+                if (ModelState.IsValid)
                 {
                     db.CT_Users.Add(cT_Users);
                     db.SaveChanges();
                     return RedirectToAction("Index");
                 }
-
-
-                ViewBag.Rol = new SelectList(db.CT_Roles, "id", "Role", cT_Users.Rol);
             }
-          
-
-          
+            
+            ViewBag.Rol = new SelectList(db.CT_Roles, "id", "Role", cT_Users.Rol);
             return View(cT_Users);
         }
 
