@@ -48,23 +48,34 @@ namespace MedicalApp.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "id,UserName,Rol,Name,BornDate,Password,LastLogin")] CT_Users cT_Users,int id)
+        public ActionResult Create( MedicalApp.Models.dbOwnModels.CT_UsersCE model, [Bind(Include = "id,UserName,Rol,Name,BornDate,Password,LastLogin")] CT_Users cT_Users)
         {
 
-            CT_Users cT_Userss = db.CT_Users.Find(id);
-            if (cT_Userss == null)
+            if (model.UserName == null)
             {
-                return HttpNotFound();
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            else
+            CT_Users cT_Users0 = db.CT_Users.Find(model.UserName);
+            if (cT_Users0 != null)
             {
-                db.CT_Users.Add(cT_Users);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
-         
+                CT_Users cT_Userss = db.CT_Users.Find(id);
+                if (cT_Userss == null)
+                {
+                    return HttpNotFound();
+                }
+                else
+                {
+                    db.CT_Users.Add(cT_Users);
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
 
-            ViewBag.Rol = new SelectList(db.CT_Roles, "id", "Role", cT_Users.Rol);
+
+                ViewBag.Rol = new SelectList(db.CT_Roles, "id", "Role", cT_Users.Rol);
+            }
+          
+
+          
             return View(cT_Users);
         }
 
