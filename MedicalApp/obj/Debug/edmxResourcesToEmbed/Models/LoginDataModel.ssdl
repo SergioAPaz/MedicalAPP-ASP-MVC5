@@ -24,7 +24,7 @@
     <Property Name="Name" Type="varchar" MaxLength="50" />
     <Property Name="BornDate" Type="varchar" MaxLength="50" />
     <Property Name="Password" Type="varchar" MaxLength="50" />
-    <Property Name="LastLogin" Type="date" />
+    <Property Name="LastLogin" Type="datetime" />
   </EntityType>
   <Association Name="FK_CT_Users_CT_Roles">
     <End Role="CT_Roles" Type="Self.CT_Roles" Multiplicity="0..1" />

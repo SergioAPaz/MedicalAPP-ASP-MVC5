@@ -34,7 +34,7 @@
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="BornDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="LastLogin" Type="DateTime" Precision="0" />
+    <Property Name="LastLogin" Type="DateTime" Precision="3" />
     <NavigationProperty Name="CT_Roles" Relationship="MedicalAppModel.FK_CT_Users_CT_Roles" FromRole="CT_Users" ToRole="CT_Roles" />
   </EntityType>
   <Association Name="FK_CT_Users_CT_Roles">

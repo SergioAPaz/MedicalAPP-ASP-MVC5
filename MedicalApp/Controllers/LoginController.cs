@@ -5,6 +5,8 @@ using System.Web;
 using System.Web.Mvc;
 using MedicalApp.Models;
 using MedicalApp.Models.OwnModels;
+using System.Data.Entity;
+using MedicalApp.Models.dbOwnModels;
 
 namespace MedicalApp.Controllers
 {
@@ -17,7 +19,7 @@ namespace MedicalApp.Controllers
         }
 
         [HttpPost]
-        public ActionResult Authorize(MedicalApp.Models.dbOwnModels.CT_UsersCE userModel)
+        public ActionResult Authorize(CT_UsersCE userModel)
         {
             using (MedicalAppEntities1 db = new MedicalAppEntities1())
             {
@@ -46,9 +48,21 @@ namespace MedicalApp.Controllers
                 }
                 else
                 {
-                    Session["User"] = userDetails.UserName;
+                    if (ModelState.IsValid)
+                    {
+                        //UPDATE EN LASTLOGIN DEL USUARIO Y SALVA EN DB
+                        CT_Users f = db.CT_Users.SingleOrDefault(x => x.UserName == userModel.UserName);
+                        f.LastLogin = DateTime.Now;
+                        db.Entry(f).State = EntityState.Modified;
+                        db.SaveChanges();
 
-                    return RedirectToAction("Index", "Home");
+                        Session["User"] = userDetails.Name;
+                        return RedirectToAction("Index", "Home");
+                    }
+                  
+
+
+                   
                 }
 
             }

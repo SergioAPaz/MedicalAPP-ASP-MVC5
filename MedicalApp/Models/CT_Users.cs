@@ -9,21 +9,16 @@
 
 namespace MedicalApp.Models
 {
-    using OwnModels;
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-
+    
     public partial class CT_Users
     {
-
-      
-        public int id { get; set; } 
+        public int id { get; set; }
         public string UserName { get; set; }
         public Nullable<int> Rol { get; set; }
         public string Name { get; set; }
         public string BornDate { get; set; }
-       
         public string Password { get; set; }
         public Nullable<System.DateTime> LastLogin { get; set; }
     
