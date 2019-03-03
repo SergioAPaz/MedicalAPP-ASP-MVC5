@@ -41,6 +41,10 @@
     <table class="table table-hover table-bordered table-condensed alex">
         <thead style="background-color:dodgerblue;color:white">
             <tr>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.id)
+                </th>
                 <th>
                     @Html.DisplayNameFor(model => model.UserName)
                 </th>
@@ -64,6 +68,9 @@
             @foreach (var item in Model)
             {
                 <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.id)
+                    </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.UserName)
                     </td>

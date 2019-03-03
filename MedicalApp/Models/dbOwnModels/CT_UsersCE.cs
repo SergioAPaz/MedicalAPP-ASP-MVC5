@@ -14,6 +14,7 @@ namespace MedicalApp.Models.dbOwnModels
         public Nullable<int> Rol { get; set; }
         public string Name { get; set; }
         public string BornDate { get; set; }
+        [Required]
         [DataType(DataType.Password)]
         public string Password { get; set; }
         public Nullable<System.DateTime> LastLogin { get; set; }
@@ -21,4 +22,7 @@ namespace MedicalApp.Models.dbOwnModels
 
         public virtual CT_Roles CT_Roles { get; set; }
     }
+
+
+   
 }
