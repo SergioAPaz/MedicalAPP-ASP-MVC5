@@ -7,15 +7,18 @@
 <script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
 <script src="~/Scripts/bootstrap.min.js"></script>
 
-<link href="~/Content/Assets/FontAwesome/css/all.css" rel="stylesheet" />
+<link href="~/Content/Assets/FontAwesome/fontawesome/css/all.css" rel="stylesheet" />
 <div style="text-align:center">
 
 
     <h4 style="margin-top:15px">Seleccione una opcion</h4>
     <br />
-    @Html.ActionLink("Crear nueva cita", "Index", "GestionDeUsuarios", null, new { @class = "btn btn-lg btn-outline-primary", Style = "width:180px;height:150px;vertical-align:center" })
+    @*@Html.ActionLink("Crear nueva cita", "Index", "GestionDeUsuarios", null, new { @class = "btn btn-lg btn-outline-primary", Style = "width:180px;height:150px;vertical-align:center" })*@
+
+    <a href='@(Url.Action("Index", "GestionDeUsuarios"))' class="btn btn-lg  btn-outline-primary" style="width:180px;height:150px"><i class="fas fa-address-book" style="font-size:40px;margin-top:15px"></i><br />Gestionar Usuarios</a>
 
 
+   
     <a href='@(Url.Action("Index", "GestionDeUsuarios"))' class="btn btn-lg  btn-outline-primary" style="width:180px;height:150px"><i class="fas fa-male" style="font-size:40px;margin-top:15px"></i><br />Gestionar Usuarios</a>
     <br />
     <br />

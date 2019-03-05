@@ -16,7 +16,7 @@ namespace MedicalApp.Models
     {
         public int id { get; set; }
         public string UserName { get; set; }
-        public Nullable<int> Rol { get; set; }
+        public int Rol { get; set; }
         public string Name { get; set; }
         public string BornDate { get; set; }
         public string Password { get; set; }

@@ -14,7 +14,7 @@ namespace MedicalApp.Models
     
     public partial class CT_Doctores
     {
-        public int id { get; set; }
+        public int @int { get; set; }
         public string Name { get; set; }
     }
 }

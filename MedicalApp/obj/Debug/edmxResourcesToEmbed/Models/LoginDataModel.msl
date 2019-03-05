@@ -5,7 +5,7 @@
       <EntityTypeMapping TypeName="MedicalAppModel.CT_Doctores">
         <MappingFragment StoreEntitySet="CT_Doctores">
           <ScalarProperty Name="Name" ColumnName="Name" />
-          <ScalarProperty Name="id" ColumnName="id" />
+          <ScalarProperty Name="int" ColumnName="int" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

@@ -11,9 +11,9 @@
   </EntityContainer>
   <EntityType Name="CT_Doctores">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="int" />
     </Key>
-    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="int" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="CT_Roles">
@@ -21,7 +21,7 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="Role" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="CT_Users" Relationship="MedicalAppModel.FK_CT_Users_CT_Roles" FromRole="CT_Roles" ToRole="CT_Users" />
   </EntityType>
   <EntityType Name="CT_Users">
@@ -30,7 +30,7 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Name="Rol" Type="Int32" />
+    <Property Name="Rol" Type="Int32" Nullable="false" />
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="BornDate" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
@@ -38,7 +38,7 @@
     <NavigationProperty Name="CT_Roles" Relationship="MedicalAppModel.FK_CT_Users_CT_Roles" FromRole="CT_Users" ToRole="CT_Roles" />
   </EntityType>
   <Association Name="FK_CT_Users_CT_Roles">
-    <End Type="MedicalAppModel.CT_Roles" Role="CT_Roles" Multiplicity="0..1" />
+    <End Type="MedicalAppModel.CT_Roles" Role="CT_Roles" Multiplicity="1" />
     <End Type="MedicalAppModel.CT_Users" Role="CT_Users" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CT_Roles">

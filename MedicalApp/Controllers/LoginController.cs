@@ -56,13 +56,13 @@ namespace MedicalApp.Controllers
                         db.Entry(f).State = EntityState.Modified;
                         db.SaveChanges();
 
-                        Session["User"] = userDetails.Name;
-                        return RedirectToAction("Index", "Home");
+                       
                     }
-                  
+
+                    Session["User"] = userDetails.Name;
+                    return RedirectToAction("Index", "Home");
 
 
-                   
                 }
 
             }

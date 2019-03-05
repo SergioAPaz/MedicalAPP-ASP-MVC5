@@ -2,9 +2,9 @@
 <Schema Namespace="MedicalAppModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityType Name="CT_Doctores">
     <Key>
-      <PropertyRef Name="id" />
+      <PropertyRef Name="int" />
     </Key>
-    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="int" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="CT_Roles">
@@ -12,7 +12,7 @@
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="Role" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="Role" Type="varchar" MaxLength="50" />
   </EntityType>
   <EntityType Name="CT_Users">
     <Key>
@@ -20,14 +20,14 @@
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="UserName" Type="varchar" MaxLength="50" />
-    <Property Name="Rol" Type="int" />
+    <Property Name="Rol" Type="int" Nullable="false" />
     <Property Name="Name" Type="varchar" MaxLength="50" />
     <Property Name="BornDate" Type="varchar" MaxLength="50" />
     <Property Name="Password" Type="varchar" MaxLength="50" />
     <Property Name="LastLogin" Type="datetime" />
   </EntityType>
   <Association Name="FK_CT_Users_CT_Roles">
-    <End Role="CT_Roles" Type="Self.CT_Roles" Multiplicity="0..1" />
+    <End Role="CT_Roles" Type="Self.CT_Roles" Multiplicity="1" />
     <End Role="CT_Users" Type="Self.CT_Users" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CT_Roles">
