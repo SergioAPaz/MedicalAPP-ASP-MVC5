@@ -1,4 +1,6 @@
-﻿@{
+﻿@model IEnumerable<MedicalApp.Models.CT_Users>
+
+@{
     ViewBag.Title = "Home Page";
 }
 
@@ -8,8 +10,123 @@
 <script src="~/Scripts/bootstrap.min.js"></script>
 
 <link href="~/Content/Assets/FontAwesome/fontawesome/css/all.css" rel="stylesheet" />
-<div style="text-align:center">
 
+
+<div class="alert alert-info" style="margin-top:15px;text-align:center">
+    <h3>Gestion de tareas</h3>
+</div>
+<div class="col-12">
+
+    <div id="accordion">
+
+        <div class="card">
+            <div class="card-header">
+                <a class="card-link" data-toggle="collapse" href="#collapseOne">
+                    Mis tareas pendientes
+                </a>
+            </div>
+            <div id="collapseOne" class="collapse show">
+                <div class="card-body">
+
+
+                    <table class="table table-hover table-bordered table-condensed alex">
+                        <thead style="background-color:dodgerblue;color:white">
+                            <tr>
+
+                                <th>
+                                    @Html.DisplayNameFor(model => model.id)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.UserName)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Name)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.BornDate)
+                                </th>
+
+                                <th>
+                                    @Html.DisplayNameFor(model => model.LastLogin)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.CT_Roles.Role)
+                                </th>
+                                <th></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.id)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.UserName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Name)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.BornDate)
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.LastLogin)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CT_Roles.Role)
+                                    </td>
+                                    <td style="width:100px">
+                                       
+                                        @Html.ActionLink("Eliminar", "Delete", "Home", new { id = item.id }, new { @class = "btn btn-sm btn-warning pull-left", Style = "color:#222;margion-left:-50px" })
+
+                                        @*@Html.ActionLink("Delete", "Delete", new { id = item.id })*@
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+
+
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
+                    Tareas que he asignado
+                </a>
+            </div>
+            <div id="collapseTwo" class="collapse">
+                <div class="card-body">
+                    Lorem ipsum..
+                </div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">
+                    Tareas programadas
+                </a>
+            </div>
+            <div id="collapseThree" class="collapse">
+                <div class="card-body">
+                    Lorem ipsum..
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+</div>
+
+
+<div style="text-align:center;display:none">
 
     <h4 style="margin-top:15px">Seleccione una opcion</h4>
     <br />
@@ -18,7 +135,7 @@
     <a href='@(Url.Action("Index", "GestionDeUsuarios"))' class="btn btn-lg  btn-outline-primary" style="width:180px;height:150px"><i class="fas fa-address-book" style="font-size:40px;margin-top:15px"></i><br />Gestionar Usuarios</a>
 
 
-   
+
     <a href='@(Url.Action("Index", "Administration"))' class="btn btn-lg  btn-outline-primary" style="width:180px;height:150px"><i class="fas fa-male" style="font-size:40px;margin-top:15px"></i><br />Administrar</a>
     <br />
     <br />
