@@ -20,8 +20,8 @@ namespace MedicalApp.Controllers
 
         public ActionResult Index()
         {
-            var cT_Users = db.CT_Users.Include(c => c.CT_Roles);
-            return View(cT_Users.ToList());
+            var TTareas = db.Tareas.Include(c => c.CT_Users);
+            return View(TTareas.ToList());
         }
 
         public ActionResult About()
@@ -43,8 +43,8 @@ namespace MedicalApp.Controllers
         {
             if (id != null)
             {
-                CT_Users cT_Users = db.CT_Users.Find(id);
-                db.CT_Users.Remove(cT_Users);
+                Tareas TTareas = db.Tareas.Find(id);
+                db.Tareas.Remove(TTareas);
                 db.SaveChanges();
                 
             }

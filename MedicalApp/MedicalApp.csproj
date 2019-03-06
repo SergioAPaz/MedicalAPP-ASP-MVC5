@@ -254,6 +254,9 @@
     <Compile Include="Models\OwnModels\EncryptionModel.cs" />
     <Compile Include="Models\OwnModels\GestionDeUsuariosModels.cs" />
     <Compile Include="Models\OwnModels\LoginModels.cs" />
+    <Compile Include="Models\Tareas.cs">
+      <DependentUpon>LoginDataModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>

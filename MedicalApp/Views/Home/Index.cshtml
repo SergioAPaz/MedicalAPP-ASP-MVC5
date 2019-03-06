@@ -1,4 +1,4 @@
-﻿@model IEnumerable<MedicalApp.Models.CT_Users>
+﻿@model IEnumerable<MedicalApp.Models.Tareas>
 
 @{
     ViewBag.Title = "Home Page";
@@ -37,20 +37,42 @@
                                     @Html.DisplayNameFor(model => model.id)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.UserName)
+                                    @Html.DisplayNameFor(model => model.Fecha)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Name)
+                                    @Html.DisplayNameFor(model => model.CT_Users1.UserName)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.BornDate)
+                                    @Html.DisplayNameFor(model => model.TituloTarea)
                                 </th>
 
                                 <th>
-                                    @Html.DisplayNameFor(model => model.LastLogin)
+                                    @Html.DisplayNameFor(model => model.Descripcion)
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.CT_Roles.Role)
+                                    @Html.DisplayNameFor(model => model.CT_Users.UserName)
+                                </th>
+
+                                <th>
+                                    @Html.DisplayNameFor(model => model.FechaLimite)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Vencida)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Terminada)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.FechaDeTermino)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.Adjunto)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.ComentarioDeCierre)
+                                </th>
+                                <th>
+                                    @Html.DisplayNameFor(model => model.EvidenciaDeCierreAdjunto)
                                 </th>
                                 <th></th>
                             </tr>
@@ -63,21 +85,44 @@
                                         @Html.DisplayFor(modelItem => item.id)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.UserName)
+                                        @Html.DisplayFor(modelItem => item.Fecha)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.Name)
+                                        @Html.DisplayFor(modelItem => item.CT_Users1.UserName)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.BornDate)
+                                        @Html.DisplayFor(modelItem => item.TituloTarea)
                                     </td>
 
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.LastLogin)
+                                        @Html.DisplayFor(modelItem => item.Descripcion)
                                     </td>
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.CT_Roles.Role)
+                                        @Html.DisplayFor(modelItem => item.CT_Users.UserName)
                                     </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FechaLimite)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Vencida)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Terminada)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FechaDeTermino)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Adjunto)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.ComentarioDeCierre)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.EvidenciaDeCierreAdjunto)
+                                    </td>
+
                                     <td style="width:100px">
                                         @Html.ActionLink( "Delete", "Delete","Home",   new { id = item.id },
                                         new { @class = "btn btn-sm btn-warning pull-left", Style = "color:#222;margion-left:-50px" , onclick = "return confirm('Are you sure you wish to delete this article?');" })

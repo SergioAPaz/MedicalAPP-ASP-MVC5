@@ -30,5 +30,24 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="Tareas">
+      <EntityTypeMapping TypeName="MedicalAppModel.Tareas">
+        <MappingFragment StoreEntitySet="Tareas">
+          <ScalarProperty Name="EvidenciaDeCierreAdjunto" ColumnName="EvidenciaDeCierreAdjunto" />
+          <ScalarProperty Name="ComentarioDeCierre" ColumnName="ComentarioDeCierre" />
+          <ScalarProperty Name="Adjunto" ColumnName="Adjunto" />
+          <ScalarProperty Name="FechaDeTermino" ColumnName="FechaDeTermino" />
+          <ScalarProperty Name="Terminada" ColumnName="Terminada" />
+          <ScalarProperty Name="Vencida" ColumnName="Vencida" />
+          <ScalarProperty Name="FechaLimite" ColumnName="FechaLimite" />
+          <ScalarProperty Name="Asignado" ColumnName="Asignado" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="TituloTarea" ColumnName="TituloTarea" />
+          <ScalarProperty Name="Asignador" ColumnName="Asignador" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="id" ColumnName="id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

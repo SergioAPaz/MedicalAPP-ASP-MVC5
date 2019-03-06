@@ -79,8 +79,6 @@ C:\Users\Public-pc\Documents\MEGAsync\MisDesarrrollos\mas\MedicalApp\MedicalApp\
 C:\Users\Public-pc\Documents\MEGAsync\MisDesarrrollos\mas\MedicalApp\MedicalApp\bin\System.Web.WebPages.Razor.xml
 C:\Users\Public-pc\Documents\MEGAsync\MisDesarrrollos\mas\MedicalApp\MedicalApp\obj\Debug\MedicalApp.dll
 C:\Users\Public-pc\Documents\MEGAsync\MisDesarrrollos\mas\MedicalApp\MedicalApp\obj\Debug\MedicalApp.pdb
-C:\Users\SergioPaz\Documents\MEGAsync\MisDesarrrollos\AppMedica\MedicalAPP-ASP-MVC5\MedicalApp\obj\Debug\MedicalApp.dll
-C:\Users\SergioPaz\Documents\MEGAsync\MisDesarrrollos\AppMedica\MedicalAPP-ASP-MVC5\MedicalApp\obj\Debug\MedicalApp.pdb
 C:\Users\SergioPaz\Documents\MEGAsync\MisDesarrrollos\AppMedica\MedicalAPP-ASP-MVC5\MedicalApp\bin\ApplicationInsights.config
 C:\Users\SergioPaz\Documents\MEGAsync\MisDesarrrollos\AppMedica\MedicalAPP-ASP-MVC5\MedicalApp\bin\roslyn\csc.exe
 C:\Users\SergioPaz\Documents\MEGAsync\MisDesarrrollos\AppMedica\MedicalAPP-ASP-MVC5\MedicalApp\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -160,3 +158,6 @@ C:\Users\SergioPaz\Documents\MEGAsync\MisDesarrrollos\AppMedica\MedicalAPP-ASP-M
 C:\Users\SergioPaz\Documents\MEGAsync\MisDesarrrollos\AppMedica\MedicalAPP-ASP-MVC5\MedicalApp\bin\System.Web.WebPages.xml
 C:\Users\SergioPaz\Documents\MEGAsync\MisDesarrrollos\AppMedica\MedicalAPP-ASP-MVC5\MedicalApp\bin\System.Web.WebPages.Deployment.xml
 C:\Users\SergioPaz\Documents\MEGAsync\MisDesarrrollos\AppMedica\MedicalAPP-ASP-MVC5\MedicalApp\bin\System.Web.WebPages.Razor.xml
+C:\Users\SergioPaz\Documents\MEGAsync\MisDesarrrollos\AppMedica\MedicalAPP-ASP-MVC5\MedicalApp\obj\Debug\MedicalApp.dll
+C:\Users\SergioPaz\Documents\MEGAsync\MisDesarrrollos\AppMedica\MedicalAPP-ASP-MVC5\MedicalApp\obj\Debug\MedicalApp.pdb
+C:\Users\SergioPaz\Documents\MEGAsync\MisDesarrrollos\AppMedica\MedicalAPP-ASP-MVC5\MedicalApp\obj\Debug\MedicalApp.csprojResolveAssemblyReference.cache

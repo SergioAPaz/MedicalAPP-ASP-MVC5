@@ -14,6 +14,13 @@ namespace MedicalApp.Models
     
     public partial class CT_Users
     {
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public CT_Users()
+        {
+            this.Tareas = new HashSet<Tareas>();
+            this.Tareas1 = new HashSet<Tareas>();
+        }
+    
         public int id { get; set; }
         public string UserName { get; set; }
         public int Rol { get; set; }
@@ -23,5 +30,9 @@ namespace MedicalApp.Models
         public Nullable<System.DateTime> LastLogin { get; set; }
     
         public virtual CT_Roles CT_Roles { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Tareas> Tareas { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Tareas> Tareas1 { get; set; }
     }
 }
