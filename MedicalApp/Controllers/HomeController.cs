@@ -9,7 +9,7 @@ using System.Web.Mvc;
 using MedicalApp.Models;
 using MedicalApp.Models.dbOwnModels;
 using MedicalApp.Models.OwnModels;
-
+using System.Dynamic;
 
 namespace MedicalApp.Controllers
 {
@@ -20,8 +20,19 @@ namespace MedicalApp.Controllers
 
         public ActionResult Index()
         {
-            var TTareas = db.Tareas.Include(c => c.CT_Users);
-            return View(TTareas.ToList());
+            ViewBag.Asignado = new SelectList(db.CT_Users, "id", "UserName");
+            ViewBag.Asignador = new SelectList(db.CT_Users, "id", "UserName");
+
+
+            ViewModel mymodel = new ViewModel();
+            mymodel.TareasIE = db.Tareas.Include(c => c.CT_Users);
+            return View(mymodel);
+
+            //ViewBag.Rol = new SelectList(db.CT_Roles, "id", "Role");
+            //return View();
+
+            //var TTareas = db.Tareas.Include(c => c.CT_Users);
+            //return View(TTareas.ToList());
         }
 
         public ActionResult About()
@@ -50,6 +61,29 @@ namespace MedicalApp.Controllers
             }
             return RedirectToAction("Index");
 
+        }
+        public ActionResult Create()
+        {
+            ViewBag.Asignado = new SelectList(db.CT_Users, "id", "UserName");
+            ViewBag.Asignador = new SelectList(db.CT_Users, "id", "UserName");
+            return View();
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Create(ViewModel viewmodel)
+        {
+            Tareas dfgnjk = viewmodel.TareasFC;
+            if (ModelState.IsValid)
+            {
+                db.Tareas.Add(dfgnjk);
+                db.SaveChanges();
+                return RedirectToAction("Index");
+            }
+
+            ViewBag.Asignado = new SelectList(db.CT_Users, "id", "UserName");
+            ViewBag.Asignador = new SelectList(db.CT_Users, "id", "UserName");
+            return View(dfgnjk);
         }
 
 

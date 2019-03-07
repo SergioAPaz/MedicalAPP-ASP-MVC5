@@ -234,6 +234,8 @@
       <DependentUpon>LoginDataModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\dbOwnModels\CT_UsersCE.cs" />
+    <Compile Include="Models\dbOwnModels\TareasCE.cs" />
+    <Compile Include="Models\dbOwnModels\ViewModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\LoginDataModel.Context.cs">
       <AutoGen>True</AutoGen>

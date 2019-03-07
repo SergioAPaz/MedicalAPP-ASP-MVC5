@@ -1,22 +1,38 @@
-﻿@model IEnumerable<MedicalApp.Models.Tareas>
-
+﻿@model MedicalApp.Models.dbOwnModels.ViewModel
 @{
-    ViewBag.Title = "Home Page";
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Styles.Render("~/Content/css2")
+
+    ViewBag.Title = "Tasks";
 }
 
-<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
-
-<script src="https://code.jquery.com/jquery-3.2.1.min.js"></script>
-<script src="~/Scripts/bootstrap.min.js"></script>
 
 <link href="~/Content/Assets/FontAwesome/fontawesome/css/all.css" rel="stylesheet" />
+
+
+<link href="~/Content/Assets/JQDataTables/datatables.min.css" rel="stylesheet" />
+
+<script src="~/Content/Assets/JQDataTables/datatables.min.js"></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.alex').DataTable();
+    });
+</script>
 
 
 <div class="alert alert-info" style="margin-top:15px;text-align:center">
     <h3>Gestion de tareas</h3>
 </div>
+
+<div class="col-12">
+    <a class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="color:white;cursor:pointer;margin-bottom:-7px">Nueva tarea</a>
+</div>
 <div class="col-12">
 
+    <br />
     <div id="accordion">
 
         <div class="card">
@@ -34,52 +50,43 @@
                             <tr>
 
                                 <th>
-                                    @Html.DisplayNameFor(model => model.id)
+                                    Folio
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Fecha)
+                                    Fecha
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.CT_Users1.UserName)
+                                    Asignador
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.TituloTarea)
+                                    TituloTarea
                                 </th>
 
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Descripcion)
+                                    Descripcion
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.CT_Users.UserName)
+                                    Asignado
                                 </th>
 
                                 <th>
-                                    @Html.DisplayNameFor(model => model.FechaLimite)
+                                    FechaLimite
                                 </th>
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Vencida)
+                                    Vencida
                                 </th>
+
+
                                 <th>
-                                    @Html.DisplayNameFor(model => model.Terminada)
+                                    Adjunto
                                 </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.FechaDeTermino)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.Adjunto)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.ComentarioDeCierre)
-                                </th>
-                                <th>
-                                    @Html.DisplayNameFor(model => model.EvidenciaDeCierreAdjunto)
-                                </th>
+
                                 <th></th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var item in Model)
-            {
+                            @foreach (var item in Model.TareasIE)
+                            {
                                 <tr>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.id)
@@ -100,32 +107,20 @@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.CT_Users.UserName)
                                     </td>
-
                                     <td>
-                                        @Html.DisplayFor(modelItem => item.FechaLimite)
+                                        @item.FechaLimite.Value.ToString("MM/dd/yyyy")
                                     </td>
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Vencida)
                                     </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Terminada)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.FechaDeTermino)
-                                    </td>
+
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Adjunto)
                                     </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.ComentarioDeCierre)
-                                    </td>
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.EvidenciaDeCierreAdjunto)
-                                    </td>
 
-                                    <td style="width:100px">
-                                        @Html.ActionLink( "Delete", "Delete","Home",   new { id = item.id },
-                                        new { @class = "btn btn-sm btn-warning pull-left", Style = "color:#222;margion-left:-50px" , onclick = "return confirm('Are you sure you wish to delete this article?');" })
+                                    <td style="width:10px">
+                                        @Html.ActionLink("Eliminar", "Delete", "Home", new { id = item.id },
+                                        new { @class = "btn btn-sm btn-warning pull-left", Style = "color:#222;margion-left:-50px", onclick = "return confirm('Are you sure you wish to delete this article?');" })
                                     </td>
                                 </tr>
                             }
@@ -184,3 +179,123 @@
     <br />
 </div>
 <br /><br /><br /><br /><br />
+
+
+
+
+@using (Html.BeginForm("Create", "Home", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+
+
+    <div class="modal fade" id="myModal">
+        <div class="modal-dialog modal-lg">
+
+
+
+
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header" style="background-color:#42A5F5;color:white">
+                    <h4 class="modal-title">Crear nueva tarea</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+
+                    <div class="row">
+                        <div class="col-6">
+                            <label>Fecha</label>
+                            <br />
+                            @Html.EditorFor(model => model.TareasFC.Fecha, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                        <div class="col-6">
+                            <label>Asignador</label>
+                            <br />
+                            @Html.DropDownListFor(model => model.TareasFC.Asignador, new SelectList(Model.TareasIE, "Asignador"))
+                        </div>
+                        <div class="col-6">
+                            <label>TituloTarea</label>
+                            <br />
+                            @Html.EditorFor(model => model.TareasFC.TituloTarea, new { htmlAttributes = new { @class = "form-control" } })
+                            @*@Html.DropDownList("Asignado", null, htmlAttributes: new { @class = "form-control" })*@
+                        </div>
+
+                        <div class="col-6">
+                            <label>Descripcion</label>
+                            <br />
+                            @Html.EditorFor(model => model.TareasFC.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                            @*@Html.DropDownList("Asignado", null, htmlAttributes: new { @class = "form-control" })*@
+                        </div>
+                        <div class="col-6">
+                            <label>Asignado</label>
+                            <br />
+                            @Html.DropDownList("Asignado", null, htmlAttributes: new { @class = "form-control" })
+                            @*@Html.DropDownList("Asignado", null, htmlAttributes: new { @class = "form-control" })*@
+                        </div>
+                        <div class="col-6">
+                            <label>FechaLimite</label>
+                            <br />
+                            @Html.EditorFor(model => model.TareasFC.FechaLimite, new { htmlAttributes = new { @class = "form-control" } })
+                            @*@Html.DropDownList("Asignado", null, htmlAttributes: new { @class = "form-control" })*@
+                        </div>
+                        <div class="col-6">
+                            <label>Vencida</label>
+                            <br />
+                            @Html.EditorFor(model => model.TareasFC.Vencida, new { htmlAttributes = new { @class = "form-control" } })
+                            @*@Html.DropDownList("Asignado", null, htmlAttributes: new { @class = "form-control" })*@
+                        </div>
+                        <div class="col-6">
+                            <label>Terminada</label>
+                            <br />
+                            @Html.EditorFor(model => model.TareasFC.Terminada, new { htmlAttributes = new { @class = "form-control" } })
+                            @*@Html.DropDownList("Asignado", null, htmlAttributes: new { @class = "form-control" })*@
+                        </div>
+                        <div class="col-6">
+                            <label>FechaDeTermino</label>
+                            <br />
+                            @Html.EditorFor(model => model.TareasFC.FechaDeTermino, new { htmlAttributes = new { @class = "form-control" } })
+                            @*@Html.DropDownList("Asignado", null, htmlAttributes: new { @class = "form-control" })*@
+                        </div>
+                        <div class="col-6">
+                            <label>Adjunto</label>
+                            <br />
+                            @Html.EditorFor(model => model.TareasFC.Adjunto, new { htmlAttributes = new { @class = "form-control" } })
+                            @*@Html.DropDownList("Asignado", null, htmlAttributes: new { @class = "form-control" })*@
+                        </div>
+                        <div class="col-6">
+                            <label>ComentarioDeCierre</label>
+                            <br />
+                            @Html.EditorFor(model => model.TareasFC.ComentarioDeCierre, new { htmlAttributes = new { @class = "form-control" } })
+                            @*@Html.DropDownList("Asignado", null, htmlAttributes: new { @class = "form-control" })*@
+                        </div>
+                        <div class="col-6">
+                            <label>EvidenciaDeCierreAdjunto</label>
+                            <br />
+                            @Html.EditorFor(model => model.TareasFC.EvidenciaDeCierreAdjunto, new { htmlAttributes = new { @class = "form-control" } })
+                            @*@Html.DropDownList("Asignado", null, htmlAttributes: new { @class = "form-control" })*@
+
+                        </div>
+
+
+                    </div>
+
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <input type="submit" value="Crear tarea" class="btn btn-primary" />
+                        <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Cancelar</button>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+}
