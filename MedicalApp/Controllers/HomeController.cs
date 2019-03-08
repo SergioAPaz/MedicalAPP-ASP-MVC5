@@ -71,19 +71,19 @@ namespace MedicalApp.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(ViewModel viewmodel)
+        public ActionResult Create(ViewModel tareaf)
         {
-            Tareas dfgnjk = viewmodel.TareasFC;
+            Tareas tarea = tareaf.TareasFC;
             if (ModelState.IsValid)
             {
-                db.Tareas.Add(dfgnjk);
+                db.Tareas.Add(tarea);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
             ViewBag.Asignado = new SelectList(db.CT_Users, "id", "UserName");
             ViewBag.Asignador = new SelectList(db.CT_Users, "id", "UserName");
-            return View(dfgnjk);
+            return View(tarea);
         }
 
 

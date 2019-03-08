@@ -215,69 +215,59 @@
                         <div class="col-6">
                             <label>Asignador</label>
                             <br />
-                            @Html.DropDownListFor(model => model.TareasFC.Asignador, new SelectList(Model.TareasIE, "Asignador"))
+                            @Html.DropDownListFor(model => model.TareasFC.Asignador, ViewBag.Asignador as IEnumerable<SelectListItem>, htmlAttributes: new { @class = "form-control" }).
                         </div>
                         <div class="col-6">
                             <label>TituloTarea</label>
                             <br />
                             @Html.EditorFor(model => model.TareasFC.TituloTarea, new { htmlAttributes = new { @class = "form-control" } })
-                            @*@Html.DropDownList("Asignado", null, htmlAttributes: new { @class = "form-control" })*@
                         </div>
 
                         <div class="col-6">
                             <label>Descripcion</label>
                             <br />
                             @Html.EditorFor(model => model.TareasFC.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
-                            @*@Html.DropDownList("Asignado", null, htmlAttributes: new { @class = "form-control" })*@
                         </div>
                         <div class="col-6">
                             <label>Asignado</label>
                             <br />
-                            @Html.DropDownList("Asignado", null, htmlAttributes: new { @class = "form-control" })
-                            @*@Html.DropDownList("Asignado", null, htmlAttributes: new { @class = "form-control" })*@
+                            @*DROPDOWNLIST ESPECIAL PARA QUE GUARDE EN EL ACTIONNAME CREATE PERO TAMBIEN PARA QUE MUESTRE LOS NOMBRES DE LA TABLA FORANEA AL CARGAR*@
+                            @Html.DropDownListFor(model => model.TareasFC.Asignado, ViewBag.Asignado as IEnumerable<SelectListItem>, htmlAttributes: new { @class = "form-control" })
                         </div>
                         <div class="col-6">
                             <label>FechaLimite</label>
                             <br />
                             @Html.EditorFor(model => model.TareasFC.FechaLimite, new { htmlAttributes = new { @class = "form-control" } })
-                            @*@Html.DropDownList("Asignado", null, htmlAttributes: new { @class = "form-control" })*@
                         </div>
                         <div class="col-6">
                             <label>Vencida</label>
                             <br />
                             @Html.EditorFor(model => model.TareasFC.Vencida, new { htmlAttributes = new { @class = "form-control" } })
-                            @*@Html.DropDownList("Asignado", null, htmlAttributes: new { @class = "form-control" })*@
                         </div>
                         <div class="col-6">
                             <label>Terminada</label>
                             <br />
                             @Html.EditorFor(model => model.TareasFC.Terminada, new { htmlAttributes = new { @class = "form-control" } })
-                            @*@Html.DropDownList("Asignado", null, htmlAttributes: new { @class = "form-control" })*@
                         </div>
                         <div class="col-6">
                             <label>FechaDeTermino</label>
                             <br />
                             @Html.EditorFor(model => model.TareasFC.FechaDeTermino, new { htmlAttributes = new { @class = "form-control" } })
-                            @*@Html.DropDownList("Asignado", null, htmlAttributes: new { @class = "form-control" })*@
                         </div>
                         <div class="col-6">
                             <label>Adjunto</label>
                             <br />
                             @Html.EditorFor(model => model.TareasFC.Adjunto, new { htmlAttributes = new { @class = "form-control" } })
-                            @*@Html.DropDownList("Asignado", null, htmlAttributes: new { @class = "form-control" })*@
                         </div>
                         <div class="col-6">
                             <label>ComentarioDeCierre</label>
                             <br />
                             @Html.EditorFor(model => model.TareasFC.ComentarioDeCierre, new { htmlAttributes = new { @class = "form-control" } })
-                            @*@Html.DropDownList("Asignado", null, htmlAttributes: new { @class = "form-control" })*@
                         </div>
                         <div class="col-6">
                             <label>EvidenciaDeCierreAdjunto</label>
                             <br />
                             @Html.EditorFor(model => model.TareasFC.EvidenciaDeCierreAdjunto, new { htmlAttributes = new { @class = "form-control" } })
-                            @*@Html.DropDownList("Asignado", null, htmlAttributes: new { @class = "form-control" })*@
-
                         </div>
 
 

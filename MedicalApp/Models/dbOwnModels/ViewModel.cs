@@ -7,8 +7,9 @@ namespace MedicalApp.Models.dbOwnModels
 {
     public class ViewModel
     {
-        public IEnumerable<MedicalApp.Models.Tareas> TareasIE { get; set; }
         public Tareas TareasFC { get; set; }
+        public IEnumerable<MedicalApp.Models.Tareas> TareasIE { get; set; }
+       
         
 
     }
