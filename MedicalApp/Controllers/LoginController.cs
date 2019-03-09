@@ -59,7 +59,11 @@ namespace MedicalApp.Controllers
                        
                     }
 
-                    Session["User"] = userDetails.Name;
+                    var TUsers = db.CT_Users.Where(x => x.UserName == userModel.UserName).FirstOrDefault();
+
+                    Session["User"] = userDetails.UserName;
+                    Session["FullUserName"] = userDetails.Name;
+                    Session["PKUser"] = TUsers.id;
                     return RedirectToAction("Index", "Home");
 
 

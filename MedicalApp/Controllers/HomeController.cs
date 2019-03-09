@@ -60,6 +60,7 @@ namespace MedicalApp.Controllers
                 db.SaveChanges();
                 
             }
+            TempData["ShowModal1"] = "TareaEliminada";
             return RedirectToAction("Index");
 
         }
@@ -88,11 +89,12 @@ namespace MedicalApp.Controllers
                     Adjunto = tareaf.TareasFC.Adjunto,
                 });
                 db.SaveChanges();
+                TempData["ShowModal1"] = "Exito";
                 return RedirectToAction("Index");
             }
             else
             {
-                TempData["ShowModal1"] = "FaltanDatos";
+                TempData["ShowModal1"] = "1";
                 return RedirectToAction("Index");
             }
 

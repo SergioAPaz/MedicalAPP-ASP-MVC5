@@ -85,7 +85,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var item in Model.TareasIE)
+                            @foreach (var item in Model.TareasIE.Where(x => x.Asignado == Convert.ToInt16(Session["PKUser"].ToString() )))
                             {
                                 <tr>
                                     <td>
@@ -120,7 +120,7 @@
 
                                     <td style="width:10px">
                                         @Html.ActionLink("Eliminar", "Delete", "Home", new { id = item.id },
-                                        new { @class = "btn btn-sm btn-warning pull-left", Style = "color:#222;margion-left:-50px", onclick = "return confirm('Are you sure you wish to delete this article?');" })
+                                        new { @class = "btn btn-sm btn-warning pull-left", Style = "color:#222;margion-left:-50px", onclick = "return confirm('Esta seguro de eliminar esta tarea?');" })
                                     </td>
                                 </tr>
                             }
@@ -216,13 +216,12 @@
                         <div class="col-6">
                             <label>Titulo</label>
                             <br />
-                            @Html.EditorFor(model => model.TareasFC.TituloTarea, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                            @Html.EditorFor(model => model.TareasFC.TituloTarea, new { htmlAttributes = new { @class = "form-control"} })
                         </div>
-
                         <div class="col-12" style="margin-bottom:15px">
                             <label>Descripcion</label>
                             <br />
-                            @Html.EditorFor(model => model.TareasFC.Descripcion, new { htmlAttributes = new { @class = "form-control", required = "required" } })
+                            @Html.EditorFor(model => model.TareasFC.Descripcion, new { htmlAttributes = new { @class = "form-control"} })
                         </div>
                         <div class="col-6">
                             <label>Asignado</label>
@@ -233,11 +232,8 @@
                         <div class="col-6">
                             <label>FechaLimite</label>
                             <br />
-                            @Html.EditorFor(model => model.TareasFC.FechaLimite, new { htmlAttributes = new { @class = "form-control"} })
+                            @Html.EditorFor(model => model.TareasFC.FechaLimite, new { htmlAttributes = new { @class = "form-control" } })
                         </div>
-                       
-
-
                     </div>
                     <div class="col-12">
                       <br />
@@ -268,24 +264,49 @@
     string Title = "";
     string Body = "";
     string colorTitle = "";
-    if (TempData["ShowModal1"] != null)
+
+   
+        if ((string)TempData["ShowModal1"] == "1")
+        {
+            colorTitle = "#e57373";
+            Title = "Datos incompletos";
+            Body = "Por favor llenar todos los campos en el formulario.";
+
+            <script type='text/javascript'>
+            function openModal28() {
+                $('#AlertModal').modal('show');
+            }
+            </script>
+            <script>openModal28();</script>
+        }
+
+        if ((string)TempData["ShowModal1"] == "Exito")
+        {
+            colorTitle = "#00C851";
+            Title = "Exito";
+            Body = "Tarea creada con exito.";
+
+            <script type='text/javascript'>
+            function openModal28() {
+                $('#AlertModal').modal('show');
+            }
+            </script>
+
+            <script>openModal28();</script>
+    }
+    if ((string)TempData["ShowModal1"] == "TareaEliminada")
     {
-
-
         colorTitle = "#e57373";
-        Title = "Datos incompletos";
-        Body = "Por favor llenar todos los campos en el formulario.";
-
+        Title = "Exito";
+        Body = "Tarea eliminada con exito.";
 
         <script type='text/javascript'>
             function openModal28() {
                 $('#AlertModal').modal('show');
             }
         </script>
-
-        <script>openModal28();</script>
+            <script>openModal28();</script>
     }
-
 
 
 }
