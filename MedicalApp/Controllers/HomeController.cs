@@ -11,6 +11,7 @@ using MedicalApp.Models.dbOwnModels;
 using MedicalApp.Models.OwnModels;
 using System.Dynamic;
 
+
 namespace MedicalApp.Controllers
 {
 
@@ -73,17 +74,31 @@ namespace MedicalApp.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Create(ViewModel tareaf)
         {
-            Tareas tarea = tareaf.TareasFC;
             if (ModelState.IsValid)
             {
-                db.Tareas.Add(tarea);
+                //Se pasan los campos de uno por uno a la tabla Tareas de SQL debido a que los datos provienen de un ViewModel(ClaseAuxiliar) para poder modificar 
+                //el modelo sin que se pierdan los cambios al recrear la base de datos
+                db.Tareas.Add(new Tareas{
+                    Fecha =DateTime.Now,
+                    Asignador = tareaf.TareasFC.Asignador,
+                    TituloTarea = tareaf.TareasFC.TituloTarea,
+                    Descripcion = tareaf.TareasFC.Descripcion,
+                    Asignado = tareaf.TareasFC.Asignado,
+                    FechaLimite = tareaf.TareasFC.FechaLimite,
+                    Adjunto = tareaf.TareasFC.Adjunto,
+                });
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
+            else
+            {
+                TempData["ShowModal1"] = "FaltanDatos";
+                return RedirectToAction("Index");
+            }
 
-            ViewBag.Asignado = new SelectList(db.CT_Users, "id", "UserName");
-            ViewBag.Asignador = new SelectList(db.CT_Users, "id", "UserName");
-            return View(tarea);
+            //ViewBag.Asignado = new SelectList(db.CT_Users, "id", "UserName");
+            //ViewBag.Asignador = new SelectList(db.CT_Users, "id", "UserName");
+            //return View(tareaf);
         }
 
 

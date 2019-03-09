@@ -207,26 +207,22 @@
                 <div class="modal-body">
 
                     <div class="row">
-                        <div class="col-6">
-                            <label>Fecha</label>
-                            <br />
-                            @Html.EditorFor(model => model.TareasFC.Fecha, new { htmlAttributes = new { @class = "form-control" } })
-                        </div>
+                        
                         <div class="col-6">
                             <label>Asignador</label>
                             <br />
-                            @Html.DropDownListFor(model => model.TareasFC.Asignador, ViewBag.Asignador as IEnumerable<SelectListItem>, htmlAttributes: new { @class = "form-control" }).
+                            @Html.DropDownListFor(model => model.TareasFC.Asignador, ViewBag.Asignador as IEnumerable<SelectListItem>, htmlAttributes: new { @class = "form-control"}).
                         </div>
                         <div class="col-6">
-                            <label>TituloTarea</label>
+                            <label>Titulo</label>
                             <br />
-                            @Html.EditorFor(model => model.TareasFC.TituloTarea, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.TareasFC.TituloTarea, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                         </div>
 
-                        <div class="col-6">
+                        <div class="col-12" style="margin-bottom:15px">
                             <label>Descripcion</label>
                             <br />
-                            @Html.EditorFor(model => model.TareasFC.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.TareasFC.Descripcion, new { htmlAttributes = new { @class = "form-control", required = "required" } })
                         </div>
                         <div class="col-6">
                             <label>Asignado</label>
@@ -237,42 +233,15 @@
                         <div class="col-6">
                             <label>FechaLimite</label>
                             <br />
-                            @Html.EditorFor(model => model.TareasFC.FechaLimite, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.TareasFC.FechaLimite, new { htmlAttributes = new { @class = "form-control"} })
                         </div>
-                        <div class="col-6">
-                            <label>Vencida</label>
-                            <br />
-                            @Html.EditorFor(model => model.TareasFC.Vencida, new { htmlAttributes = new { @class = "form-control" } })
-                        </div>
-                        <div class="col-6">
-                            <label>Terminada</label>
-                            <br />
-                            @Html.EditorFor(model => model.TareasFC.Terminada, new { htmlAttributes = new { @class = "form-control" } })
-                        </div>
-                        <div class="col-6">
-                            <label>FechaDeTermino</label>
-                            <br />
-                            @Html.EditorFor(model => model.TareasFC.FechaDeTermino, new { htmlAttributes = new { @class = "form-control" } })
-                        </div>
-                        <div class="col-6">
-                            <label>Adjunto</label>
-                            <br />
-                            @Html.EditorFor(model => model.TareasFC.Adjunto, new { htmlAttributes = new { @class = "form-control" } })
-                        </div>
-                        <div class="col-6">
-                            <label>ComentarioDeCierre</label>
-                            <br />
-                            @Html.EditorFor(model => model.TareasFC.ComentarioDeCierre, new { htmlAttributes = new { @class = "form-control" } })
-                        </div>
-                        <div class="col-6">
-                            <label>EvidenciaDeCierreAdjunto</label>
-                            <br />
-                            @Html.EditorFor(model => model.TareasFC.EvidenciaDeCierreAdjunto, new { htmlAttributes = new { @class = "form-control" } })
-                        </div>
+                       
 
 
                     </div>
-
+                    <div class="col-12">
+                      <br />
+                    </div>
                     <!-- Modal footer -->
                     <div class="modal-footer">
                         <input type="submit" value="Crear tarea" class="btn btn-primary" />
@@ -288,4 +257,57 @@
 
         </div>
     </div>
+}
+
+
+
+
+
+
+@{
+    string Title = "";
+    string Body = "";
+    string colorTitle = "";
+    if (TempData["ShowModal1"] != null)
+    {
+
+
+        colorTitle = "#e57373";
+        Title = "Datos incompletos";
+        Body = "Por favor llenar todos los campos en el formulario.";
+
+
+        <script type='text/javascript'>
+            function openModal28() {
+                $('#AlertModal').modal('show');
+            }
+        </script>
+
+        <script>openModal28();</script>
+    }
+
+
+
+}
+
+<div class="modal fade" id="AlertModal">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color:@colorTitle;color:white">
+                <h4 class="modal-title">@Title</h4>
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                @Body
+            </div>
+
+        </div>
+    </div>
+</div>
+@{
+
+    <script type="text/javascript">
+        openModal28();
+    </script>
+
 }
