@@ -8,6 +8,15 @@
     ViewBag.Title = "Tasks";
 }
 
+<link href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
+<script type='text/javascript'>
+    $(function(){
+        $('.date-picker').datepicker({ dateFormat: 'yy/mm/dd' }).val();
+    })
+</script>
+
 
 <link href="~/Content/Assets/FontAwesome/fontawesome/css/all.css" rel="stylesheet" />
 
@@ -29,6 +38,7 @@
 
 <div class="col-12">
     <a class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="color:white;cursor:pointer;margin-bottom:-7px">Nueva tarea</a>
+
 </div>
 <div class="col-12">
 
@@ -48,44 +58,20 @@
                     <table class="table table-hover table-bordered table-condensed alex">
                         <thead style="background-color:dodgerblue;color:white">
                             <tr>
-
-                                <th>
-                                    Folio
-                                </th>
-                                <th>
-                                    Fecha
-                                </th>
-                                <th>
-                                    Asignador
-                                </th>
-                                <th>
-                                    TituloTarea
-                                </th>
-
-                                <th>
-                                    Descripcion
-                                </th>
-                                <th>
-                                    Asignado
-                                </th>
-
-                                <th>
-                                    FechaLimite
-                                </th>
-                                <th>
-                                    Vencida
-                                </th>
-
-
-                                <th>
-                                    Adjunto
-                                </th>
-
-                                <th></th>
+                                <th>Folio</th>
+                                <th>Fecha</th>
+                                <th>Asignador</th>
+                                <th>TituloTarea</th>
+                                <th>Descripcion</th>
+                                <th>Asignado</th>
+                                <th>FechaLimite</th>
+                                <th>Vencida</th>
+                                <th>Adjunto</th>
+                                <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var item in Model.TareasIE.Where(x => x.Asignado == Convert.ToInt16(Session["PKUser"].ToString() )))
+                            @foreach (var item in Model.TareasIE.Where(x => x.Asignado == Model.PkUser ))
                             {
                                 <tr>
                                     <td>
@@ -136,12 +122,73 @@
         <div class="card">
             <div class="card-header">
                 <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
-                    Tareas que he asignado
+                    Tareas que he asignado a otros usuarios
                 </a>
             </div>
             <div id="collapseTwo" class="collapse">
                 <div class="card-body">
-                    Lorem ipsum..
+                   
+                    @*<label>@Model.FulluserName.ToString()</label>*@
+                    <table class="table table-hover table-bordered table-condensed alex">
+                        <thead style="background-color:dodgerblue;color:white">
+                            <tr>
+                                <th>Folio</th>
+                                <th>Fecha</th>
+                                <th>Asignador</th>
+                                <th>TituloTarea</th>
+                                <th>Descripcion</th>
+                                <th>Asignado</th>
+                                <th>FechaLimite</th>
+                                <th>Vencida</th>
+                                <th>Adjunto</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.TareasIE.Where(x => x.Asignador == Model.PkUser && x.Asignado != Model.PkUser ))
+                                {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.id)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Fecha)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CT_Users1.UserName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TituloTarea)
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Descripcion)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CT_Users.UserName)
+                                    </td>
+                                    <td>
+                                        @item.FechaLimite.Value.ToString("MM/dd/yyyy")
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Vencida)
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Adjunto)
+                                    </td>
+
+                                    <td style="width:10px">
+                                        @Html.ActionLink("Eliminar", "Delete", "Home", new { id = item.id },
+                                        new { @class = "btn btn-sm btn-warning pull-left", Style = "color:#222;margion-left:-50px", onclick = "return confirm('Esta seguro de eliminar esta tarea?');" })
+                                    </td>
+                                </tr>
+                                }
+                        </tbody>
+
+                    </table>
+
+
                 </div>
             </div>
         </div>
@@ -232,7 +279,7 @@
                         <div class="col-6">
                             <label>FechaLimite</label>
                             <br />
-                            @Html.EditorFor(model => model.TareasFC.FechaLimite, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.TareasFC.FechaLimite, new { htmlAttributes = new { @class = "form-control date-picker", autocomplete = "off" } })
                         </div>
                     </div>
                     <div class="col-12">
@@ -296,7 +343,7 @@
     }
     if ((string)TempData["ShowModal1"] == "TareaEliminada")
     {
-        colorTitle = "#e57373";
+        colorTitle = "#00C851";
         Title = "Exito";
         Body = "Tarea eliminada con exito.";
 

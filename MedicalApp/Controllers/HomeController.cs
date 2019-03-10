@@ -23,9 +23,13 @@ namespace MedicalApp.Controllers
         {
             ViewBag.Asignado = new SelectList(db.CT_Users, "id", "UserName");
             ViewBag.Asignador = new SelectList(db.CT_Users, "id", "UserName");
-
-
+            
             ViewModel mymodel = new ViewModel();
+
+            mymodel.FulluserName = Session["FullUserName"].ToString();
+            mymodel.UserName = Session["User"].ToString();
+            mymodel.PkUser = Convert.ToInt16(Session["PKUser"]);
+
             mymodel.TareasIE = db.Tareas.Include(c => c.CT_Users);
             return View(mymodel);
 
