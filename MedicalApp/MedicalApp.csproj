@@ -1992,7 +1992,8 @@
     <Content Include="Scripts\popper-utils.js.map" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="App_Data\" />
+    <Folder Include="App_Data\uploads\" />
+    <Folder Include="Files\Adjuntos\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Project_Readme.html" />

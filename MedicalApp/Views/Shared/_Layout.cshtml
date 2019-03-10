@@ -1,9 +1,10 @@
 ﻿
 @{
-    if (Session["FullUserName"] ==null)
-    {
-        Response.Redirect("~/Login/Index");
-    }
+//EL CONTROLADOR SE EJECUTA PRIMERO QUE LA VISTA POR LO QUE YA NO ES NESESARIO VALIDAR LA EXISTENCIA DE LA SESSION EN EL LAYOUT
+//if (Session["FullUserName"] ==null)
+//{
+//    Response.Redirect("~/Login/Index");
+//}
 }
 
 <!DOCTYPE html>
