@@ -162,3 +162,13 @@ C:\Users\SergioPaz\Documents\MEGAsync\MisDesarrrollos\AppMedica\MedicalAPP-ASP-M
 C:\Users\SergioPaz\Documents\MEGAsync\MisDesarrrollos\AppMedica\MedicalAPP-ASP-MVC5\MedicalApp\obj\Debug\MedicalApp.pdb
 C:\Users\SergioPaz\Documents\MEGAsync\MisDesarrrollos\AppMedica\MedicalAPP-ASP-MVC5\MedicalApp\bin\System.ValueTuple.dll
 C:\Users\SergioPaz\Documents\MEGAsync\MisDesarrrollos\AppMedica\MedicalAPP-ASP-MVC5\MedicalApp\bin\System.ValueTuple.xml
+C:\Users\SergioPaz\Documents\MEGAsync\MisDesarrrollos\AppMedica\MedicalAPP-ASP-MVC5\MedicalApp\bin\ClosedXML.dll
+C:\Users\SergioPaz\Documents\MEGAsync\MisDesarrrollos\AppMedica\MedicalAPP-ASP-MVC5\MedicalApp\bin\DocumentFormat.OpenXml.dll
+C:\Users\SergioPaz\Documents\MEGAsync\MisDesarrrollos\AppMedica\MedicalAPP-ASP-MVC5\MedicalApp\bin\ExcelNumberFormat.dll
+C:\Users\SergioPaz\Documents\MEGAsync\MisDesarrrollos\AppMedica\MedicalAPP-ASP-MVC5\MedicalApp\bin\FastMember.dll
+C:\Users\SergioPaz\Documents\MEGAsync\MisDesarrrollos\AppMedica\MedicalAPP-ASP-MVC5\MedicalApp\bin\System.IO.FileSystem.Primitives.dll
+C:\Users\SergioPaz\Documents\MEGAsync\MisDesarrrollos\AppMedica\MedicalAPP-ASP-MVC5\MedicalApp\bin\System.IO.Packaging.dll
+C:\Users\SergioPaz\Documents\MEGAsync\MisDesarrrollos\AppMedica\MedicalAPP-ASP-MVC5\MedicalApp\bin\ClosedXML.pdb
+C:\Users\SergioPaz\Documents\MEGAsync\MisDesarrrollos\AppMedica\MedicalAPP-ASP-MVC5\MedicalApp\bin\ClosedXML.xml
+C:\Users\SergioPaz\Documents\MEGAsync\MisDesarrrollos\AppMedica\MedicalAPP-ASP-MVC5\MedicalApp\bin\DocumentFormat.OpenXml.xml
+C:\Users\SergioPaz\Documents\MEGAsync\MisDesarrrollos\AppMedica\MedicalAPP-ASP-MVC5\MedicalApp\bin\ExcelNumberFormat.xml

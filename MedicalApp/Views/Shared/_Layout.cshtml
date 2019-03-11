@@ -1,10 +1,10 @@
 ﻿
 @{
-//EL CONTROLADOR SE EJECUTA PRIMERO QUE LA VISTA POR LO QUE YA NO ES NESESARIO VALIDAR LA EXISTENCIA DE LA SESSION EN EL LAYOUT
-//if (Session["FullUserName"] ==null)
-//{
-//    Response.Redirect("~/Login/Index");
-//}
+
+if (Session["FullUserName"] ==null)
+{
+    Response.Redirect("~/Login/Index");
+}
 }
 
 <!DOCTYPE html>
@@ -32,6 +32,9 @@
         <ul class="navbar-nav">
             <li class="nav-item">
                 @Html.ActionLink("Inicio", "Index", "Home",null, new { @class = "nav-link" })
+            </li>
+            <li class="nav-item">
+                @Html.ActionLink("Reportes", "Index", "Reporter", null, new { @class = "nav-link" })
             </li>
 
           

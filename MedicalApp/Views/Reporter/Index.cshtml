@@ -1,0 +1,27 @@
+﻿@*@model IEnumerable<MedicalApp.Models.Tareas>*@
+@model MedicalApp.Models.dbOwnModels.ViewModel
+
+@{
+    ViewBag.Title = "Index";
+}
+
+
+
+
+<div style="text-align:center">
+
+
+    <h2 style="margin-top:15px">Reportes</h2>
+    <br />
+    @using (Html.BeginForm("ExportData1", "Reporter", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        @Html.HiddenFor(m => m.PkUser)
+
+        <input type="submit" value="Mis tareas asignadas" class="btn btn-primary" />
+    }
+
+    <br />
+    <br />
+</div>
+<br /><br /><br /><br /><br />

@@ -55,14 +55,11 @@ namespace MedicalApp.Controllers
                         f.LastLogin = DateTime.Now;
                         db.Entry(f).State = EntityState.Modified;
                         db.SaveChanges();
-
-                       
+                        
                     }
 
                     var TUsers = db.CT_Users.Where(x => x.UserName == userModel.UserName).FirstOrDefault();
-
-
-
+                    
                     Session["User"] = userDetails.UserName;
                     Session["FullUserName"] = userDetails.Name;
                     Session["PKUser"] = TUsers.id;
