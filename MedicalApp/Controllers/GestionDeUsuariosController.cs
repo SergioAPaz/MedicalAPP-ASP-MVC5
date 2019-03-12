@@ -10,12 +10,18 @@ using MedicalApp.Models;
 using MedicalApp.Models.dbOwnModels;
 using MedicalApp.Models.OwnModels;
 
+using System.IO;
+using System.Text;
+using System.Data.SqlClient;
+using System.Configuration;
+using System.Security.Cryptography;
+
 namespace MedicalApp.Controllers
 {
     public class GestionDeUsuariosController : Controller
     {
         private MedicalAppEntities1 db = new MedicalAppEntities1();
-
+        Encryptor crypto = new Encryptor();
         // GET: GestionDeUsuarios
         public ActionResult Index()
         {
@@ -44,7 +50,7 @@ namespace MedicalApp.Controllers
             ViewBag.Rol = new SelectList(db.CT_Roles, "id", "Role");
             return View();
         }
-        
+
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult Create([Bind(Include = "id,UserName,Rol,Name,BornDate,Password,LastLogin")] CT_Users cT_Users)
@@ -53,7 +59,7 @@ namespace MedicalApp.Controllers
             bool isViewNameInvalid = db.CT_Users.Any(v => v.UserName == cT_Users.UserName);
             if (isViewNameInvalid)
             {
-                TempData["ShowModal1"] = 1;   
+                TempData["ShowModal1"] = 1;
                 return RedirectToAction("Index", cT_Users);
             }
             else
@@ -62,12 +68,14 @@ namespace MedicalApp.Controllers
                 {
                     if (cT_Users.Password != null && cT_Users.UserName != null)
                     {
-                        string Key = "1234567890abcdef"; //key must have 16 chars, other wise you may get error "key size in not valid".
+                        //string Key = "1234567890abcdef"; //key must have 16 chars, other wise you may get error "key size in not valid".
+                        //string Password2 = cT_Users.Password;
+                        //EncryptionModel Crypt = new EncryptionModel();
+                        //string EncryptedPassword = (string)Crypt.Crypt(CryptType.ENCRYPT, CryptTechnique.RIJ, Password2, Key);
                         string Password2 = cT_Users.Password;
-                        EncryptionModel Crypt = new EncryptionModel();
-                        string EncryptedPassword = (string)Crypt.Crypt(CryptType.ENCRYPT, CryptTechnique.RIJ, Password2, Key);
 
-                        cT_Users.Password = EncryptedPassword;
+
+                        cT_Users.Password = crypto.Encrypt(Password2);
                         cT_Users.BornDate = DateTime.Now.ToString();
                         db.CT_Users.Add(cT_Users);
                         db.SaveChanges();
@@ -78,11 +86,9 @@ namespace MedicalApp.Controllers
                         TempData["ShowModal1"] = "2";
                         return RedirectToAction("Create", cT_Users);
                     }
-
-                   
                 }
             }
-            
+
             ViewBag.Rol = new SelectList(db.CT_Roles, "id", "Role", cT_Users.Rol);
             return View(cT_Users);
         }
@@ -154,5 +160,7 @@ namespace MedicalApp.Controllers
             }
             base.Dispose(disposing);
         }
+
+        
     }
 }

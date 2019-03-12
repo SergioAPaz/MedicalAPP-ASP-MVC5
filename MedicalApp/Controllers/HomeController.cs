@@ -30,7 +30,7 @@ namespace MedicalApp.Controllers
             {
                 mymodel.FulluserName = Session["FullUserName"].ToString();
                 mymodel.UserName = Session["User"].ToString();
-                mymodel.PkUser = Convert.ToInt16(Session["PKUser"]);
+                mymodel.PkUser = Session["PKUser"].ToString();
             }
             else
             {

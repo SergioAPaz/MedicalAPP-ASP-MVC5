@@ -11,28 +11,50 @@ using MedicalApp.Models.dbOwnModels;
 using ClosedXML;
 using ClosedXML.Excel;
 using System.IO;
-
+using MedicalApp.Models.OwnModels;
+using System.Text;
+using System.Security.Cryptography;
 
 namespace MedicalApp.Controllers
 {
     public class ReporterController : Controller
     {
+        Encryptor crypto = new Encryptor();
         // GET: Reporter
         public ActionResult Index()
         {
-            ViewModel mymodel = new ViewModel();
-            mymodel.PkUser = Convert.ToInt16(Session["PKUser"]);
-            return View(mymodel);
+            try
+            {
+                ViewModel mymodel = new ViewModel();
+                mymodel.PkUser = crypto.Encrypt(Session["PKUser"].ToString());
+                return View(mymodel);
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Index", "Login");
+                throw;
+            }
+            
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult ExportData1(ViewModel vm)
         {
-           
+            string query = "";
+            try
+            {
+                 query = "SELECT * FROM [MedicalApp].[dbo].[Tareas] where Asignado='" + crypto.Decrypt(vm.PkUser) + "' ";
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Index", "Login");
+                throw;
+            }
+
             String constring = ConfigurationManager.ConnectionStrings["MiConexionLocal"].ConnectionString;
             SqlConnection con = new SqlConnection(constring);
-            string query = "SELECT * FROM [MedicalApp].[dbo].[Tareas] where Asignado='"+ vm.PkUser+ "' ";
+           
             DataTable dt = new DataTable();
             dt.TableName = "Tareas";
             con.Open();
@@ -62,9 +84,9 @@ namespace MedicalApp.Controllers
             return RedirectToAction("Index", "ExportData");
         }
 
-        
 
         
+
         // GET: Reporter/Details/5
         public ActionResult Details(int id)
         {
@@ -136,5 +158,7 @@ namespace MedicalApp.Controllers
                 return View();
             }
         }
+
+
     }
 }

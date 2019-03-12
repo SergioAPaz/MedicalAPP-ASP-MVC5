@@ -16,6 +16,9 @@
     @using (Html.BeginForm("ExportData1", "Reporter", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
+
+        
+
         @Html.HiddenFor(m => m.PkUser)
 
         <input type="submit" value="Mis tareas asignadas" class="btn btn-primary" />

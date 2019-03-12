@@ -283,7 +283,7 @@
       <DependentUpon>LoginDataModel.edmx</DependentUpon>
     </Compile>
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\OwnModels\EncryptionModel.cs" />
+    <Compile Include="Models\OwnModels\Encryptor.cs" />
     <Compile Include="Models\OwnModels\GestionDeUsuariosModels.cs" />
     <Compile Include="Models\OwnModels\LoginModels.cs" />
     <Compile Include="Models\Tareas.cs">
