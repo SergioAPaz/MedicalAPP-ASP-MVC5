@@ -2019,6 +2019,7 @@
     <Content Include="Views\Reporter\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="App_Data\DBScrips\" />
     <Folder Include="App_Data\uploads\" />
     <Folder Include="Files\Adjuntos\" />
   </ItemGroup>
