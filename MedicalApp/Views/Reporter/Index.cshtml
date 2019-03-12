@@ -2,28 +2,46 @@
 @model MedicalApp.Models.dbOwnModels.ViewModel
 
 @{
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Styles.Render("~/Content/css2")
+
     ViewBag.Title = "Index";
 }
+
+<link href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css" />
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
+
 
 
 
 
 <div style="text-align:center">
 
-
     <h2 style="margin-top:15px">Reportes</h2>
     <br />
-    @using (Html.BeginForm("ExportData1", "Reporter", FormMethod.Post))
-    {
-        @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-12">
+            @using (Html.BeginForm("ExportData1", "Reporter", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(m => m.PkUser)
+                <input type="submit" value="Mis tareas asignadas" class="btn btn-outline-primary" style="width:250px"  />
+            }
+            <br />
+            @using (Html.BeginForm("XlsTareas2", "Reporter", FormMethod.Post))
+            {
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(m => m.PkUser)
+                <input type="submit" value="Tareas que he asignado" class="btn btn-outline-primary" style="width:250px" />
+            }
+        </div>
 
-        
-
-        @Html.HiddenFor(m => m.PkUser)
-
-        <input type="submit" value="Mis tareas asignadas" class="btn btn-primary" />
-    }
-
+    </div>
+   
+    
     <br />
     <br />
 </div>

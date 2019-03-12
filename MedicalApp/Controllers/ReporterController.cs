@@ -85,7 +85,54 @@ namespace MedicalApp.Controllers
         }
 
 
-        
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult XlsTareas2(ViewModel vm)
+        {
+            string query = "";
+            try
+            {
+                query = "SELECT * FROM [MedicalApp].[dbo].[Tareas] where Asignador='" + crypto.Decrypt(vm.PkUser) + "' ";
+            }
+            catch (Exception)
+            {
+                return RedirectToAction("Index", "Login");
+                throw;
+            }
+
+            String constring = ConfigurationManager.ConnectionStrings["MiConexionLocal"].ConnectionString;
+            SqlConnection con = new SqlConnection(constring);
+
+            DataTable dt = new DataTable();
+            dt.TableName = "Tareas";
+            con.Open();
+            SqlDataAdapter da = new SqlDataAdapter(query, con);
+            da.Fill(dt);
+            con.Close();
+
+            using (XLWorkbook wb = new XLWorkbook())
+            {
+                wb.Worksheets.Add(dt);
+                wb.Style.Alignment.Horizontal = XLAlignmentHorizontalValues.Center;
+                wb.Style.Font.Bold = true;
+                Response.Clear();
+                Response.Buffer = true;
+                Response.Charset = "";
+                Response.ContentType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+                Response.AddHeader("content-disposition", "attachment;filename= MisTareasAsignadas " + " " + DateTime.Now + ".xlsx");
+
+                using (MemoryStream MyMemoryStream = new MemoryStream())
+                {
+                    wb.SaveAs(MyMemoryStream);
+                    MyMemoryStream.WriteTo(Response.OutputStream);
+                    Response.Flush();
+                    Response.End();
+                }
+            }
+            return RedirectToAction("Index", "ExportData");
+        }
+
+
 
         // GET: Reporter/Details/5
         public ActionResult Details(int id)

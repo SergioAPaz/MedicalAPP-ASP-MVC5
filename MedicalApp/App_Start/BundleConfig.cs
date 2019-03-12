@@ -26,7 +26,9 @@ namespace MedicalApp
                       "~/Content/bootstrap.min.css"));
             
             bundles.Add(new StyleBundle("~/Content/css2").Include(
-                      "~/Content/Assets/Login.css"));
+                      "~/Content/Assets/Login.css",
+                      "~/Content/Assets/FontAwesome/fontawesome/css/all.css"));
+
         }
     }
 }

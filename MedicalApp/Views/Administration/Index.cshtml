@@ -1,8 +1,11 @@
 ﻿
 @{
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @Styles.Render("~/Content/css2")
     ViewBag.Title = "Index";
 }
-
 
 
 
@@ -11,8 +14,11 @@
 
     <h4 style="margin-top:15px">Panel de administracion</h4>
     <br />
-    @Html.ActionLink("Gestionar Usuarios", "Index", "GestionDeUsuarios", null, new { @class = "btn btn-outline-primary" })
-    @Html.ActionLink("Gestionar Usuarios", "Index", "GestionDeUsuarios", null, new { @class = "btn btn-outline-primary" })
+    <a href="@Url.Action("Index", "GestionDeUsuarios")" class="btn btn-outline-primary" style="width:250px;height:90px;font-size:20px;padding:11px">
+      
+        <span class="fas fa-user-friends" aria-hidden="true"></span> <br /> Gestionar Usuarios
+    </a>
+
     <br />
     <br />
 </div>
