@@ -1830,6 +1830,7 @@
     <Content Include="Content\Assets\FontAwesome\fontawesome\webfonts\fa-regular-400.svg" />
     <Content Include="Content\Assets\FontAwesome\fontawesome\webfonts\fa-solid-900.svg" />
     <Content Include="Content\Assets\images\logo.png" />
+    <Content Include="Content\Assets\images\user.png" />
     <Content Include="Content\Assets\JQDataTables\datatables.min.css" />
     <Content Include="Content\Assets\JQDataTables\datatables.min.js" />
     <Content Include="Content\Assets\Login.css" />

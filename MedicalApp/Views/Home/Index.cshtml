@@ -17,6 +17,7 @@
     $(function(){
         $('.date-picker').datepicker({ dateFormat: 'yy/mm/dd' }).val();
     })
+
 </script>
 
 
@@ -39,7 +40,8 @@
 </div>
 
 <div class="col-12">
-    <a class="btn btn-primary" data-toggle="modal" data-target="#myModal" style="color:white;cursor:pointer;margin-bottom:-7px">Nueva tarea</a>
+    <button type="button"  class="btn btn-outline-primary"  data-toggle="modal" data-target="#myModal" style="cursor:pointer;margin-bottom:-7px">Nueva tarea</button>
+    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#myModal" style="cursor:pointer;margin-bottom:-7px">Nueva tarea programada</button>
 
 </div>
 <div class="col-12">
@@ -68,7 +70,7 @@
                                 <th>Asignado</th>
                                 <th>FechaLimite</th>
                                 <th>Vencida</th>
-                                <th>Adjunto</th>
+                                <th >Adjunto</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
@@ -101,11 +103,13 @@
                                     <td>
                                         @Html.DisplayFor(modelItem => item.Vencida)
                                     </td>
-
-                                    <td>
-                                        @Html.DisplayFor(modelItem => item.Adjunto)
+                                    <td style="text-align:center">
+                                        @if ( !string.IsNullOrEmpty(item.Adjunto))
+                                        {
+                                            @Html.ActionLink(" ", "Downloads", "Home", new { Adjunto = item.Adjunto }, new { @class = "fa fa-paperclip" })
+                                        }
+                                       
                                     </td>
-
                                     <td style="width:10px">
                                         @Html.ActionLink("Eliminar", "Delete", "Home", new { id = item.id },
                                         new { @class = "btn btn-sm btn-warning pull-left", Style = "color:#222;margion-left:-50px", onclick = "return confirm('Esta seguro de eliminar esta tarea?');" })
@@ -127,7 +131,7 @@
                     Tareas que he asignado a otros usuarios
                 </a>
             </div>
-            <div id="collapseTwo" class="collapse">
+            <div id="collapseTwo" class="collapse show">
                 <div class="card-body">
                    
                     @*<label>@Model.FulluserName.ToString()</label>*@

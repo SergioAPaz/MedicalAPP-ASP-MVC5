@@ -172,3 +172,4 @@ C:\Users\SergioPaz\Documents\MEGAsync\MisDesarrrollos\AppMedica\MedicalAPP-ASP-M
 C:\Users\SergioPaz\Documents\MEGAsync\MisDesarrrollos\AppMedica\MedicalAPP-ASP-MVC5\MedicalApp\bin\ClosedXML.xml
 C:\Users\SergioPaz\Documents\MEGAsync\MisDesarrrollos\AppMedica\MedicalAPP-ASP-MVC5\MedicalApp\bin\DocumentFormat.OpenXml.xml
 C:\Users\SergioPaz\Documents\MEGAsync\MisDesarrrollos\AppMedica\MedicalAPP-ASP-MVC5\MedicalApp\bin\ExcelNumberFormat.xml
+C:\Users\SergioPaz\Documents\MEGAsync\MisDesarrrollos\AppMedica\MedicalAPP-ASP-MVC5\MedicalApp\obj\Debug\MedicalApp.csprojResolveAssemblyReference.cache

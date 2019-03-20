@@ -76,6 +76,20 @@ namespace MedicalApp.Controllers
             return RedirectToAction("Index");
 
         }
+
+
+
+        
+        public ActionResult Downloads(string Adjunto)
+        {
+            string filename = Convert.ToString(Adjunto);
+            string serverpath = Server.MapPath("~/App_Data/uploads/");
+            string filepath = serverpath + filename;
+            return File(filepath, System.Net.Mime.MediaTypeNames.Application.Octet, filename);
+        }
+
+
+
         public ActionResult Create()
         {
             ViewBag.Asignado = new SelectList(db.CT_Users, "id", "UserName");
@@ -167,6 +181,8 @@ namespace MedicalApp.Controllers
             //ViewBag.Asignador = new SelectList(db.CT_Users, "id", "UserName");
             //return View(tareaf);
         }
+
+        
 
 
 
