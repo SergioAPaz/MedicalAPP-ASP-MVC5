@@ -264,15 +264,16 @@
                         <div class="col-6">
                             <label>Asignador</label>
                             <br />
-                            @Html.DropDownListFor(model => model.TareasFC.Asignador, ViewBag.Asignador as IEnumerable<SelectListItem>, htmlAttributes: new { @class = "form-control"}).
-                        </div>
+                            @Html.TextBox("txtUser", Session["FullUserName"].ToString().ToUpper(), new { @class = "form-control", @readonly="readonly" }) 
+                            @Html.EditorFor(model => model.TareasFC.Asignador,  new { htmlAttributes = new { @class = "form-control" ,@style="display:none", @Value = Session["PKUser"].ToString() } }) 
+                         </div>
                         <div class="col-6">
                             <label>Titulo</label>
                             <br />
                             @Html.EditorFor(model => model.TareasFC.TituloTarea, new { htmlAttributes = new { @class = "form-control"} })
                         </div>
                         <div class="col-12" style="margin-bottom:15px">
-                            <label>Descripcion</label>
+                            <label style="margin-top:5px">Descripcion</label>
                             <br />
                             @Html.EditorFor(model => model.TareasFC.Descripcion, new { htmlAttributes = new { @class = "form-control"} })
                         </div>
@@ -281,6 +282,11 @@
                             <br />
                             @*DROPDOWNLIST ESPECIAL PARA QUE GUARDE EN EL ACTIONNAME CREATE PERO TAMBIEN PARA QUE MUESTRE LOS NOMBRES DE LA TABLA FORANEA AL CARGAR*@
                             @Html.DropDownListFor(model => model.TareasFC.Asignado, ViewBag.Asignado as IEnumerable<SelectListItem>, htmlAttributes: new { @class = "form-control" })
+
+
+                            
+
+
                         </div>
                         <div class="col-6">
                             <label>FechaLimite</label>

@@ -12,6 +12,7 @@ using MedicalApp.Models.OwnModels;
 using System.Dynamic;
 using System.IO;
 using System.Diagnostics;
+using System.Text;
 
 namespace MedicalApp.Controllers
 {
@@ -22,7 +23,7 @@ namespace MedicalApp.Controllers
 
         public ActionResult Index()
         {
-            ViewBag.Asignado = new SelectList(db.CT_Users, "id", "UserName");
+            ViewBag.Asignado = new SelectList(db.CT_Users, "id", "Name");
             ViewBag.Asignador = new SelectList(db.CT_Users, "id", "UserName");
             
             ViewModel mymodel = new ViewModel();
@@ -125,11 +126,7 @@ namespace MedicalApp.Controllers
                 {
 
                 }
-
-
-
-
-
+                
                 try
                 {
                     if (ExisteArchivo==true)
@@ -164,9 +161,11 @@ namespace MedicalApp.Controllers
                     TempData["ShowModal1"] = "Exito";
                     return RedirectToAction("Index");
                 }
-                catch (Exception)
+                catch (Exception ex)
                 {
-                    TempData["msg"] = "<script>alert('Error al generar tarea.');</script>";
+                    TempData["msg"] = "<script>alert('Error al generar tarea. ');</script>";
+
+                    SendErrorEmail(ex.ToString());
                     return RedirectToAction("Index");
                 }
                 
@@ -180,6 +179,22 @@ namespace MedicalApp.Controllers
             //ViewBag.Asignado = new SelectList(db.CT_Users, "id", "UserName");
             //ViewBag.Asignador = new SelectList(db.CT_Users, "id", "UserName");
             //return View(tareaf);
+        }
+
+        public void SendErrorEmail(string Error)
+        {
+
+            System.Net.Mail.MailMessage message = new System.Net.Mail.MailMessage();
+            message.From = new System.Net.Mail.MailAddress("sergio.pazholguin@gmail.com");
+            message.To.Add(new System.Net.Mail.MailAddress("sergio.pazholguin@gmail.com"));
+
+            message.IsBodyHtml = true;
+            message.BodyEncoding = Encoding.UTF8;
+            message.Subject = "subject";
+            message.Body = "Error: "+Error+"";
+
+            System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient();
+            client.Send(message);
         }
 
         

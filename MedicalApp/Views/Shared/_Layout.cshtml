@@ -52,6 +52,7 @@ if (Session["FullUserName"] ==null)
                 
                 <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                    <label>@Session["FullUserName"].ToString()</label>
+                    @Html.Hidden("lblUser", Session["User"].ToString())
                 </a>
                 <div class="dropdown-menu">
                     <a>
@@ -68,7 +69,7 @@ if (Session["FullUserName"] ==null)
         </ul>
     </nav>
     <br />
-    <div class="container-fluid"  style="background-color: #fafafa; max-height: 54.5%; min-height: 54.5%; border: 1px solid  #9e9e9e; border-radius: 7px;max-width:1360px">
+    <div class="container-fluid"  style="background-color: #fafafa; max-height: 54.5%; min-height: 54.5%; border: 1px solid  #9e9e9e; border-radius: 7px;max-width:1320px">
         @RenderBody()
        
 
