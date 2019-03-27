@@ -14,7 +14,7 @@
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
 <script type='text/javascript'>
-    $(function(){
+    $(function () {
         $('.date-picker').datepicker({ dateFormat: 'yy/mm/dd' }).val();
     })
 
@@ -40,7 +40,7 @@
 </div>
 
 <div class="col-12">
-    <button type="button"  class="btn btn-outline-primary"  data-toggle="modal" data-target="#myModal" style="cursor:pointer;margin-bottom:-7px">Nueva tarea</button>
+    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#myModal" style="cursor:pointer;margin-bottom:-7px">Nueva tarea</button>
     <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#myModal" style="cursor:pointer;margin-bottom:-7px">Nueva tarea programada</button>
 
 </div>
@@ -70,12 +70,12 @@
                                 <th>Asignado</th>
                                 <th>FechaLimite</th>
                                 <th>Vencida</th>
-                                <th >Adjunto</th>
+                                <th>Adjunto</th>
                                 <th>Acciones</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var item in Model.TareasIE.Where(x => x.Asignado == Convert.ToInt32(Model.PkUser) ))
+                            @foreach (var item in Model.TareasIE.Where(x => x.Asignado == Convert.ToInt32(Model.PkUser)))
                             {
                                 <tr>
                                     <td>
@@ -104,15 +104,15 @@
                                         @Html.DisplayFor(modelItem => item.Vencida)
                                     </td>
                                     <td style="text-align:center">
-                                        @if ( !string.IsNullOrEmpty(item.Adjunto))
+                                        @if (!string.IsNullOrEmpty(item.Adjunto))
                                         {
                                             @Html.ActionLink(" ", "Downloads", "Home", new { Adjunto = item.Adjunto }, new { @class = "fa fa-paperclip" })
                                         }
-                                       
+
                                     </td>
                                     <td style="width:10px">
                                         @Html.ActionLink("Eliminar", "Delete", "Home", new { id = item.id },
-                                        new { @class = "btn btn-sm btn-warning pull-left", Style = "color:#222;margion-left:-50px", onclick = "return confirm('Esta seguro de eliminar esta tarea?');" })
+new { @class = "btn btn-sm btn-warning pull-left", Style = "color:#222;margion-left:-50px", onclick = "return confirm('Esta seguro de eliminar esta tarea?');" })
                                     </td>
                                 </tr>
                             }
@@ -133,7 +133,7 @@
             </div>
             <div id="collapseTwo" class="collapse show">
                 <div class="card-body">
-                   
+
                     @*<label>@Model.FulluserName.ToString()</label>*@
                     <table class="table table-hover table-bordered table-condensed alex">
                         <thead style="background-color:dodgerblue;color:white">
@@ -186,10 +186,10 @@
 
                                     <td style="width:10px">
                                         @Html.ActionLink("Eliminar", "Delete", "Home", new { id = item.id },
-                                        new { @class = "btn btn-sm btn-warning pull-left", Style = "color:#222;margion-left:-50px", onclick = "return confirm('Esta seguro de eliminar esta tarea?');" })
+new { @class = "btn btn-sm btn-warning pull-left", Style = "color:#222;margion-left:-50px", onclick = "return confirm('Esta seguro de eliminar esta tarea?');" })
                                     </td>
                                 </tr>
-                                }
+                            }
                         </tbody>
 
                     </table>
@@ -260,31 +260,33 @@
                 <div class="modal-body">
 
                     <div class="row">
-                        
+
                         <div class="col-6">
                             <label>Asignador</label>
                             <br />
-                            @Html.TextBox("txtUser", Session["FullUserName"].ToString().ToUpper(), new { @class = "form-control", @readonly="readonly" }) 
-                            @Html.EditorFor(model => model.TareasFC.Asignador,  new { htmlAttributes = new { @class = "form-control" ,@style="display:none", @Value = Session["PKUser"].ToString() } }) 
-                         </div>
+                            @Html.TextBox("txtUser", Session["FullUserName"].ToString().ToUpper(), new { @class = "form-control", @readonly = "readonly" })
+                            @Html.EditorFor(model => model.TareasFC.Asignador, new { htmlAttributes = new { @class = "form-control", @style = "display:none", @Value = Session["PKUser"].ToString() } })
+                        </div>
                         <div class="col-6">
                             <label>Titulo</label>
                             <br />
-                            @Html.EditorFor(model => model.TareasFC.TituloTarea, new { htmlAttributes = new { @class = "form-control"} })
+                            @Html.EditorFor(model => model.TareasFC.TituloTarea, new { htmlAttributes = new { @class = "form-control" } })
                         </div>
                         <div class="col-12" style="margin-bottom:15px">
                             <label style="margin-top:5px">Descripcion</label>
                             <br />
-                            @Html.EditorFor(model => model.TareasFC.Descripcion, new { htmlAttributes = new { @class = "form-control"} })
+                            @Html.EditorFor(model => model.TareasFC.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
                         </div>
                         <div class="col-6">
                             <label>Asignado</label>
                             <br />
                             @*DROPDOWNLIST ESPECIAL PARA QUE GUARDE EN EL ACTIONNAME CREATE PERO TAMBIEN PARA QUE MUESTRE LOS NOMBRES DE LA TABLA FORANEA AL CARGAR*@
-                            @Html.DropDownListFor(model => model.TareasFC.Asignado, ViewBag.Asignado as IEnumerable<SelectListItem>, htmlAttributes: new { @class = "form-control" })
 
 
-                            
+                            @Html.DropDownListFor(model => model.TareasFC.Asignado, ViewBag.Asignado as IEnumerable<SelectListItem>, htmlAttributes: new { @class = "form-control dfkgndjk" })
+
+
+
 
 
                         </div>
@@ -299,7 +301,7 @@
                         </div>
                     </div>
                     <div class="col-12">
-                      <br />
+                        <br />
                     </div>
                     <!-- Modal footer -->
                     <div class="modal-footer">
@@ -320,7 +322,11 @@
 
 
 
-
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.dfkgndjk option[value=@Session["PKUser"].ToString()]').attr('selected', 'selected');
+    });
+</script>
 
 
 @{
@@ -328,32 +334,32 @@
     string Body = "";
     string colorTitle = "";
 
-   
-        if ((string)TempData["ShowModal1"] == "1")
-        {
-            colorTitle = "#e57373";
-            Title = "Datos incompletos";
-            Body = "Por favor llenar todos los campos en el formulario.";
 
-            <script type='text/javascript'>
+    if ((string)TempData["ShowModal1"] == "1")
+    {
+        colorTitle = "#e57373";
+        Title = "Datos incompletos";
+        Body = "Por favor llenar todos los campos en el formulario.";
+
+        <script type='text/javascript'>
             function openModal28() {
                 $('#AlertModal').modal('show');
             }
-            </script>
+        </script>
             <script>openModal28();</script>
-        }
+    }
 
-        if ((string)TempData["ShowModal1"] == "Exito")
-        {
-            colorTitle = "#00C851";
-            Title = "Exito";
-            Body = "Tarea creada con exito.";
+    if ((string)TempData["ShowModal1"] == "Exito")
+    {
+        colorTitle = "#00C851";
+        Title = "Exito";
+        Body = "Tarea creada con exito.";
 
-            <script type='text/javascript'>
+        <script type='text/javascript'>
             function openModal28() {
                 $('#AlertModal').modal('show');
             }
-            </script>
+        </script>
 
             <script>openModal28();</script>
     }
@@ -368,7 +374,7 @@
                 $('#AlertModal').modal('show');
             }
         </script>
-            <script>openModal28();</script>
+        <script>openModal28();</script>
     }
 
 
