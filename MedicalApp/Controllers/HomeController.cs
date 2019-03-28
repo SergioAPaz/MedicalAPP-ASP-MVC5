@@ -181,6 +181,90 @@ namespace MedicalApp.Controllers
             //return View(tareaf);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult CreateProgrammedTask(ViewModel tareaf, HttpPostedFileBase file)
+        {
+            if (ModelState.IsValid)
+            {
+                //Se pasan los campos de uno por uno a la tabla Tareas de SQL debido a que los datos provienen de un ViewModel(ClaseAuxiliar) para poder modificar 
+                //el modelo sin que se pierdan los cambios al recrear la base de datos
+                string FileExtension = "Empty";
+                long FileName2 = 0;
+                bool ExisteArchivo = false;
+                try
+                {
+                    if (file.ContentLength > 0)
+                    {
+                        var fileName = Path.GetFileName(file.FileName);
+                        FileExtension = Path.GetExtension(fileName);
+                        FileName2 = (long)(DateTime.UtcNow - new DateTime(2015, 1, 1)).TotalMilliseconds;
+                        var path = Path.Combine(Server.MapPath("~/App_Data/uploads"), string.Concat(Convert.ToString(FileName2), FileExtension));
+                        file.SaveAs(path);
+                        ExisteArchivo = true;
+                    }
+
+                }
+                catch (Exception)
+                {
+
+                }
+
+                try
+                {
+                    if (ExisteArchivo == true)
+                    {
+                        db.Tareas.Add(new Tareas
+                        {
+                            Fecha = DateTime.Now,
+                            Asignador = tareaf.TareasFC.Asignador,
+                            TituloTarea = tareaf.TareasFC.TituloTarea,
+                            Descripcion = tareaf.TareasFC.Descripcion,
+                            Asignado = tareaf.TareasFC.Asignado,
+                            FechaLimite = tareaf.TareasFC.FechaLimite,
+                            Adjunto = string.Concat(Convert.ToString(FileName2), FileExtension),
+                        });
+                    }
+                    else
+                    {
+                        db.Tareas.Add(new Tareas
+                        {
+                            Fecha = DateTime.Now,
+                            Asignador = tareaf.TareasFC.Asignador,
+                            TituloTarea = tareaf.TareasFC.TituloTarea,
+                            Descripcion = tareaf.TareasFC.Descripcion,
+                            Asignado = tareaf.TareasFC.Asignado,
+                            FechaLimite = tareaf.TareasFC.FechaLimite,
+                            Adjunto = tareaf.TareasFC.Adjunto,
+                        });
+                    }
+
+
+                    db.SaveChanges();
+                    TempData["ShowModal1"] = "Exito";
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+                    TempData["msg"] = "<script>alert('Error al generar tarea. ');</script>";
+
+                    SendErrorEmail(ex.ToString());
+                    return RedirectToAction("Index");
+                }
+
+            }
+            else
+            {
+                TempData["ShowModal1"] = "1";
+                return RedirectToAction("Index");
+            }
+
+            //ViewBag.Asignado = new SelectList(db.CT_Users, "id", "UserName");
+            //ViewBag.Asignador = new SelectList(db.CT_Users, "id", "UserName");
+            //return View(tareaf);
+        }
+
+
         public void SendErrorEmail(string Error)
         {
 

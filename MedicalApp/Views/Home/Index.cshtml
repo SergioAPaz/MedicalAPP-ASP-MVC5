@@ -41,7 +41,7 @@
 
 <div class="col-12">
     <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#myModal" style="cursor:pointer;margin-bottom:-7px">Nueva tarea</button>
-    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#myModal" style="cursor:pointer;margin-bottom:-7px">Nueva tarea programada</button>
+    <button type="button" class="btn btn-outline-primary" data-toggle="modal" data-target="#myModalTareaProgramada" style="cursor:pointer;margin-bottom:-7px">Nueva tarea programada</button>
 
 </div>
 <div class="col-12">
@@ -242,6 +242,7 @@ new { @class = "btn btn-sm btn-warning pull-left", Style = "color:#222;margion-l
 
 
 
+
     <div class="modal fade" id="myModal">
         <div class="modal-dialog modal-lg">
 
@@ -322,6 +323,155 @@ new { @class = "btn btn-sm btn-warning pull-left", Style = "color:#222;margion-l
 
 
 
+
+
+@using (Html.BeginForm("CreateProgrammedTask", "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
+{
+    @Html.AntiForgeryToken()
+
+
+
+
+    <div class="modal fade" id="myModalTareaProgramada">
+        <div class="modal-dialog modal-lg">
+
+
+
+
+            <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header" style="background-color:#42A5F5;color:white">
+                    <h4 class="modal-title">Crear nueva tarea</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body">
+
+                    <div class="row">
+
+                        <div class="col-6">
+                            <label>Asignador</label>
+                            <br />
+                            @Html.TextBox("txtUser", Session["FullUserName"].ToString().ToUpper(), new { @class = "form-control", @readonly = "readonly" })
+                            @Html.EditorFor(model => model.TareasFC.Asignador, new { htmlAttributes = new { @class = "form-control", @style = "display:none", @Value = Session["PKUser"].ToString() } })
+                        </div>
+                        <div class="col-6">
+                            <label>Titulo</label>
+                            <br />
+                            @Html.EditorFor(model => model.TareasFC.TituloTarea, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                        <div class="col-12" style="margin-bottom:15px">
+                            <label style="margin-top:5px">Descripcion</label>
+                            <br />
+                            @Html.EditorFor(model => model.TareasFC.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                        <div class="col-6">
+                            <label>Asignado</label>
+                            <br />
+                            @*DROPDOWNLIST ESPECIAL PARA QUE GUARDE EN EL ACTIONNAME CREATE PERO TAMBIEN PARA QUE MUESTRE LOS NOMBRES DE LA TABLA FORANEA AL CARGAR*@
+
+
+                            @Html.DropDownListFor(model => model.TareasFC.Asignado, ViewBag.Asignado as IEnumerable<SelectListItem>, htmlAttributes: new { @class = "form-control dfkgndjk" })
+
+
+
+
+
+                        </div>
+                        <div class="col-6">
+                            <label>Frecuencia:</label>
+                            <br />
+                            <select class="form-control" style="width:370px">
+                                <option value="Sin seleccion">Sin seleccion</option>
+                                <option value="Un solo evento">Un solo evento</option>
+                                <option value="Recurrente">Recurrente</option>
+                            </select>
+
+
+                        </div>
+                        <br /><br />
+                        <div class="col-sm-6" style="margin-bottom: 10px;border:1px solid #42A5F5;max-width: 375px;margin-left: 15px;;padding: 0;border-radius: 3px;margin-top:15px">
+                            <div style="width: 100%;background-color: #42A5F5;margin-bottom: 10px;text-align: center">
+                                <label style="margin-top: 5px;color: white">Un solo evento</label>
+
+                            </div>
+                            <div style="width: 100%;">
+                                <div style="display:flex; flex-direction: row; justify-content: center; align-items: center;margin-top: 22px">
+                                    <label style="margin-left: 20px;margin-top: 9px">Fecha:</label>
+
+                                </div>
+
+                                <br>
+                            </div>
+
+                        </div>
+
+                        <div class="col-sm-6" style="margin-bottom: 10px;border:1px solid #42A5F5;max-width: 375px;margin-left: 15px;padding: 0 ;border-radius: 3px">
+                            <div style="width: 100%;background-color: #42A5F5;margin-bottom: 10px;text-align: center">
+                                <label style="margin-top: 5px;color: white">Recurrente</label>
+                            </div>
+                            <div style="width: 100%;">
+                                <div style="display:flex; flex-direction: row; justify-content: center; align-items: center">
+                                    <label style="margin-left: 20px;margin-top: 9px">Fecha de inicio:</label>
+                                   
+                                    <br>
+                                </div>
+
+                                <div style="display:flex; flex-direction: row; justify-content: center; align-items: center;margin-top: 5px">
+                                    <label style="margin-left: 0px;margin-top: 9px;margin-right: 10px">Recurrencia:</label>
+                                    <select name="PeriodicidadProgramada" class="form-control" id="PeriodicidadProgramada" style="width: 230px">
+                                        <option value="nada">Sin selección</option>
+                                        <option value="Diaria">Diaria</option>
+                                        <option value="Semanal">Semanal</option>
+                                        <option value="Quincenal">Quincenal</option>
+                                        <option value="Mensual">Mensual</option>
+                                        <option value="Anual">Anual</option>
+                                    </select>
+                                    <br>
+                                </div>
+                            </div>
+                            <br>
+                        </div>
+
+
+                    </div>
+                    <div class="col-12">
+                        <br />
+                    </div>
+                    <!-- Modal footer -->
+                    <div class="modal-footer">
+                        <input type="submit" value="Crear tarea" class="btn btn-primary" />
+                        <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Cancelar</button>
+                    </div>
+
+                </div>
+
+            </div>
+
+
+
+
+        </div>
+    </div>
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <script type="text/javascript">
     $(document).ready(function () {
         $('.dfkgndjk option[value=@Session["PKUser"].ToString()]').attr('selected', 'selected');
@@ -346,7 +496,7 @@ new { @class = "btn btn-sm btn-warning pull-left", Style = "color:#222;margion-l
                 $('#AlertModal').modal('show');
             }
         </script>
-            <script>openModal28();</script>
+        <script>openModal28();</script>
     }
 
     if ((string)TempData["ShowModal1"] == "Exito")
@@ -361,7 +511,7 @@ new { @class = "btn btn-sm btn-warning pull-left", Style = "color:#222;margion-l
             }
         </script>
 
-            <script>openModal28();</script>
+        <script>openModal28();</script>
     }
     if ((string)TempData["ShowModal1"] == "TareaEliminada")
     {
