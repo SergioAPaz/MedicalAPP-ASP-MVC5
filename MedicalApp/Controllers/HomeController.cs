@@ -191,53 +191,22 @@ namespace MedicalApp.Controllers
                 //el modelo sin que se pierdan los cambios al recrear la base de datos
                 string FileExtension = "Empty";
                 long FileName2 = 0;
-                bool ExisteArchivo = false;
-                try
-                {
-                    if (file.ContentLength > 0)
-                    {
-                        var fileName = Path.GetFileName(file.FileName);
-                        FileExtension = Path.GetExtension(fileName);
-                        FileName2 = (long)(DateTime.UtcNow - new DateTime(2015, 1, 1)).TotalMilliseconds;
-                        var path = Path.Combine(Server.MapPath("~/App_Data/uploads"), string.Concat(Convert.ToString(FileName2), FileExtension));
-                        file.SaveAs(path);
-                        ExisteArchivo = true;
-                    }
-
-                }
-                catch (Exception)
-                {
-
-                }
+              
 
                 try
                 {
-                    if (ExisteArchivo == true)
-                    {
-                        db.Tareas.Add(new Tareas
+                   
+                        db.TareasProgramadas.Add(new TareasProgramadas
                         {
-                            Fecha = DateTime.Now,
-                            Asignador = tareaf.TareasFC.Asignador,
-                            TituloTarea = tareaf.TareasFC.TituloTarea,
-                            Descripcion = tareaf.TareasFC.Descripcion,
+                            FechaDeCreacion = DateTime.Now,
+                            Asignador = tareaf.TareasProgramadasFC.Asignador,
+                            TituloTarea = tareaf.TareasProgramadasFC.TituloTarea,
+                            Descripcion = tareaf.TareasProgramadasFC.Descripcion,
                             Asignado = tareaf.TareasFC.Asignado,
-                            FechaLimite = tareaf.TareasFC.FechaLimite,
-                            Adjunto = string.Concat(Convert.ToString(FileName2), FileExtension),
+                            FechaDeProximoEvento = tareaf.TareasFC.FechaLimite,
                         });
-                    }
-                    else
-                    {
-                        db.Tareas.Add(new Tareas
-                        {
-                            Fecha = DateTime.Now,
-                            Asignador = tareaf.TareasFC.Asignador,
-                            TituloTarea = tareaf.TareasFC.TituloTarea,
-                            Descripcion = tareaf.TareasFC.Descripcion,
-                            Asignado = tareaf.TareasFC.Asignado,
-                            FechaLimite = tareaf.TareasFC.FechaLimite,
-                            Adjunto = tareaf.TareasFC.Adjunto,
-                        });
-                    }
+                    
+                    
 
 
                     db.SaveChanges();

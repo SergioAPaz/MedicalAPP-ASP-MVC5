@@ -19,6 +19,8 @@ namespace MedicalApp.Models
         {
             this.Tareas = new HashSet<Tareas>();
             this.Tareas1 = new HashSet<Tareas>();
+            this.TareasProgramadas = new HashSet<TareasProgramadas>();
+            this.TareasProgramadas1 = new HashSet<TareasProgramadas>();
         }
     
         public int id { get; set; }
@@ -34,5 +36,9 @@ namespace MedicalApp.Models
         public virtual ICollection<Tareas> Tareas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Tareas> Tareas1 { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TareasProgramadas> TareasProgramadas { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<TareasProgramadas> TareasProgramadas1 { get; set; }
     }
 }

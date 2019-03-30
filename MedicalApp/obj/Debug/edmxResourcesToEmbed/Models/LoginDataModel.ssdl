@@ -26,16 +26,26 @@
     <Property Name="Password" Type="varchar" MaxLength="50" />
     <Property Name="LastLogin" Type="datetime" />
   </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
   <EntityType Name="Tareas">
     <Key>
       <PropertyRef Name="id" />
     </Key>
     <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Fecha" Type="datetime" />
-    <Property Name="Asignador" Type="int" />
+    <Property Name="Asignador" Type="int" Nullable="false" />
     <Property Name="TituloTarea" Type="varchar" MaxLength="150" />
     <Property Name="Descripcion" Type="varchar(max)" />
-    <Property Name="Asignado" Type="int" />
+    <Property Name="Asignado" Type="int" Nullable="false" />
     <Property Name="FechaLimite" Type="date" />
     <Property Name="Vencida" Type="int" />
     <Property Name="Terminada" Type="int" />
@@ -43,6 +53,20 @@
     <Property Name="Adjunto" Type="varchar" MaxLength="50" />
     <Property Name="ComentarioDeCierre" Type="varchar(max)" />
     <Property Name="EvidenciaDeCierreAdjunto" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="TareasProgramadas">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="FechaDeCreacion" Type="date" />
+    <Property Name="Asignador" Type="int" Nullable="false" />
+    <Property Name="TituloTarea" Type="varchar" MaxLength="150" />
+    <Property Name="Descripcion" Type="varchar(max)" />
+    <Property Name="Asignado" Type="int" Nullable="false" />
+    <Property Name="FechaDeProximoEvento" Type="date" />
+    <Property Name="Frecuencia" Type="varchar" MaxLength="150" />
+    <Property Name="Finalizada" Type="varchar" MaxLength="150" />
   </EntityType>
   <Association Name="FK_CT_Users_CT_Roles">
     <End Role="CT_Roles" Type="Self.CT_Roles" Multiplicity="1" />
@@ -57,7 +81,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Tareas_CT_Users">
-    <End Role="CT_Users" Type="Self.CT_Users" Multiplicity="0..1" />
+    <End Role="CT_Users" Type="Self.CT_Users" Multiplicity="1" />
     <End Role="Tareas" Type="Self.Tareas" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CT_Users">
@@ -69,7 +93,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Tareas_CT_Users1">
-    <End Role="CT_Users" Type="Self.CT_Users" Multiplicity="0..1" />
+    <End Role="CT_Users" Type="Self.CT_Users" Multiplicity="1" />
     <End Role="Tareas" Type="Self.Tareas" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CT_Users">
@@ -80,11 +104,37 @@
       </Dependent>
     </ReferentialConstraint>
   </Association>
+  <Association Name="FK_TareasProgramadas_CT_Users">
+    <End Role="CT_Users" Type="Self.CT_Users" Multiplicity="1" />
+    <End Role="TareasProgramadas" Type="Self.TareasProgramadas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CT_Users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="TareasProgramadas">
+        <PropertyRef Name="Asignador" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TareasProgramadas_CT_Users1">
+    <End Role="CT_Users" Type="Self.CT_Users" Multiplicity="1" />
+    <End Role="TareasProgramadas" Type="Self.TareasProgramadas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CT_Users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="TareasProgramadas">
+        <PropertyRef Name="Asignador" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <EntityContainer Name="MedicalAppModelStoreContainer">
     <EntitySet Name="CT_Doctores" EntityType="Self.CT_Doctores" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CT_Roles" EntityType="Self.CT_Roles" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="CT_Users" EntityType="Self.CT_Users" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="Tareas" EntityType="Self.Tareas" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="TareasProgramadas" EntityType="Self.TareasProgramadas" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_CT_Users_CT_Roles" Association="Self.FK_CT_Users_CT_Roles">
       <End Role="CT_Roles" EntitySet="CT_Roles" />
       <End Role="CT_Users" EntitySet="CT_Users" />
@@ -96,6 +146,14 @@
     <AssociationSet Name="FK_Tareas_CT_Users1" Association="Self.FK_Tareas_CT_Users1">
       <End Role="CT_Users" EntitySet="CT_Users" />
       <End Role="Tareas" EntitySet="Tareas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TareasProgramadas_CT_Users" Association="Self.FK_TareasProgramadas_CT_Users">
+      <End Role="CT_Users" EntitySet="CT_Users" />
+      <End Role="TareasProgramadas" EntitySet="TareasProgramadas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TareasProgramadas_CT_Users1" Association="Self.FK_TareasProgramadas_CT_Users1">
+      <End Role="CT_Users" EntitySet="CT_Users" />
+      <End Role="TareasProgramadas" EntitySet="TareasProgramadas" />
     </AssociationSet>
   </EntityContainer>
 </Schema>

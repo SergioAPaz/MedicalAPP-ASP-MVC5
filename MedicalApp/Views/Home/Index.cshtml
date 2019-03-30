@@ -13,9 +13,21 @@
 <link href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css" />
 <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 <script src="http://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
+
+<script src="~/Scripts/bootstrap.min.js"></script>
+
+
+
+<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 <script type='text/javascript'>
     $(function () {
-        $('.date-picker').datepicker({ dateFormat: 'yy/mm/dd' }).val();
+        $('.date-picker1').datepicker({ dateFormat: 'yy/mm/dd' }).val();
+    })
+    $(function () {
+        $('.date-picker2').datepicker({ dateFormat: 'yy/mm/dd' }).val();
+    })
+    $(function () {
+        $('.date-picker3').datepicker({ dateFormat: 'yy/mm/dd' }).val();
     })
 
 </script>
@@ -292,9 +304,9 @@ new { @class = "btn btn-sm btn-warning pull-left", Style = "color:#222;margion-l
 
                         </div>
                         <div class="col-6">
-                            <label>FechaLimite</label>
+                            <label>Fecha limite</label>
                             <br />
-                            @Html.EditorFor(model => model.TareasFC.FechaLimite, new { htmlAttributes = new { @class = "form-control date-picker", autocomplete = "off" } })
+                            @Html.EditorFor(model => model.TareasFC.FechaLimite, new { htmlAttributes = new { @class = "form-control date-picker1", autocomplete = "off" } })
                         </div>
                         <div class="col-12" style="margin-top:25px">
                             <label for="file">Adjunto:</label>
@@ -342,7 +354,7 @@ new { @class = "btn btn-sm btn-warning pull-left", Style = "color:#222;margion-l
 
                 <!-- Modal Header -->
                 <div class="modal-header" style="background-color:#42A5F5;color:white">
-                    <h4 class="modal-title">Crear nueva tarea</h4>
+                    <h4 class="modal-title">Crear nueva tarea programada</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
 
@@ -355,17 +367,17 @@ new { @class = "btn btn-sm btn-warning pull-left", Style = "color:#222;margion-l
                             <label>Asignador</label>
                             <br />
                             @Html.TextBox("txtUser", Session["FullUserName"].ToString().ToUpper(), new { @class = "form-control", @readonly = "readonly" })
-                            @Html.EditorFor(model => model.TareasFC.Asignador, new { htmlAttributes = new { @class = "form-control", @style = "display:none", @Value = Session["PKUser"].ToString() } })
+                            @Html.EditorFor(model => model.TareasProgramadasFC.Asignador, new { htmlAttributes = new { @class = "form-control", @style = "display:none", @Value = Session["PKUser"].ToString() } })
                         </div>
                         <div class="col-6">
                             <label>Titulo</label>
                             <br />
-                            @Html.EditorFor(model => model.TareasFC.TituloTarea, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.TareasProgramadasFC.TituloTarea, new { htmlAttributes = new { @class = "form-control" } })
                         </div>
                         <div class="col-12" style="margin-bottom:15px">
                             <label style="margin-top:5px">Descripcion</label>
                             <br />
-                            @Html.EditorFor(model => model.TareasFC.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.EditorFor(model => model.TareasProgramadasFC.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
                         </div>
                         <div class="col-6">
                             <label>Asignado</label>
@@ -373,7 +385,7 @@ new { @class = "btn btn-sm btn-warning pull-left", Style = "color:#222;margion-l
                             @*DROPDOWNLIST ESPECIAL PARA QUE GUARDE EN EL ACTIONNAME CREATE PERO TAMBIEN PARA QUE MUESTRE LOS NOMBRES DE LA TABLA FORANEA AL CARGAR*@
 
 
-                            @Html.DropDownListFor(model => model.TareasFC.Asignado, ViewBag.Asignado as IEnumerable<SelectListItem>, htmlAttributes: new { @class = "form-control dfkgndjk" })
+                            @Html.DropDownListFor(model => model.TareasProgramadasFC.Asignado, ViewBag.Asignado as IEnumerable<SelectListItem>, htmlAttributes: new { @class = "form-control dfkgndjk" })
 
 
 
@@ -397,25 +409,34 @@ new { @class = "btn btn-sm btn-warning pull-left", Style = "color:#222;margion-l
                                 <label style="margin-top: 5px;color: white">Un solo evento</label>
 
                             </div>
+
                             <div style="width: 100%;">
-                                <div style="display:flex; flex-direction: row; justify-content: center; align-items: center;margin-top: 22px">
-                                    <label style="margin-left: 20px;margin-top: 9px">Fecha:</label>
+                                <div style="display:flex; flex-direction: row; justify-content: center; align-items: center;margin-top: 22px;margin-left:-25px">
+                                    <label style="margin-left: 20px;margin-top: 9px;padding-right:10px">Fecha:</label><br /><br />
+                                    @Html.EditorFor(model => model.TareasProgramadasFC.FechaDeProximoEvento, new { htmlAttributes = new { @class = "form-control date-picker2", autocomplete = "off", @style = "width:190px", id = "txtDateUnSoloEvento" } })
+
 
                                 </div>
 
+
+
+
                                 <br>
+
                             </div>
 
                         </div>
 
-                        <div class="col-sm-6" style="margin-bottom: 10px;border:1px solid #42A5F5;max-width: 375px;margin-left: 15px;padding: 0 ;border-radius: 3px">
+                        <div class="col-sm-6" style="margin-bottom: 10px;border:1px solid #42A5F5;max-width: 375px;margin-left: 15px;padding: 0 ;border-radius: 3px;margin-top:15px">
                             <div style="width: 100%;background-color: #42A5F5;margin-bottom: 10px;text-align: center">
                                 <label style="margin-top: 5px;color: white">Recurrente</label>
                             </div>
                             <div style="width: 100%;">
                                 <div style="display:flex; flex-direction: row; justify-content: center; align-items: center">
-                                    <label style="margin-left: 20px;margin-top: 9px">Fecha de inicio:</label>
-                                   
+                                    <label style="margin-left: 12px;margin-top: 9px;text-align:center;padding-right:19px">Fecha <br /> de inicio:</label>
+                                    @Html.EditorFor(model => model.TareasProgramadasFC.FechaDeProximoEvento, new { htmlAttributes = new { @class = "form-control date-picker3", autocomplete = "off", @style = "width:229px", id = "txtDateRecurrente" } })
+
+
                                     <br>
                                 </div>
 
@@ -442,7 +463,7 @@ new { @class = "btn btn-sm btn-warning pull-left", Style = "color:#222;margion-l
                     </div>
                     <!-- Modal footer -->
                     <div class="modal-footer">
-                        <input type="submit" value="Crear tarea" class="btn btn-primary" />
+                        <input type="submit" value="Crear tarea programada" class="btn btn-primary" />
                         <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Cancelar</button>
                     </div>
 
@@ -469,27 +490,30 @@ new { @class = "btn btn-sm btn-warning pull-left", Style = "color:#222;margion-l
 
 
 
-
-
-
-<script type="text/javascript">
-    $(document).ready(function () {
-        $('.dfkgndjk option[value=@Session["PKUser"].ToString()]').attr('selected', 'selected');
-    });
-</script>
-
-
 @{
     string Title = "";
     string Body = "";
     string colorTitle = "";
-
 
     if ((string)TempData["ShowModal1"] == "1")
     {
         colorTitle = "#e57373";
         Title = "Datos incompletos";
         Body = "Por favor llenar todos los campos en el formulario.";
+        <div class="modal fade" id="AlertModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color:@colorTitle;color:white">
+                        <h4 class="modal-title">@Title</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        @Body
+                    </div>
+
+                </div>
+            </div>
+        </div>
 
         <script type='text/javascript'>
             function openModal28() {
@@ -505,6 +529,21 @@ new { @class = "btn btn-sm btn-warning pull-left", Style = "color:#222;margion-l
         Title = "Exito";
         Body = "Tarea creada con exito.";
 
+        <div class="modal fade" id="AlertModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color:@colorTitle;color:white">
+                        <h4 class="modal-title">@Title</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        @Body
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
         <script type='text/javascript'>
             function openModal28() {
                 $('#AlertModal').modal('show');
@@ -518,7 +557,20 @@ new { @class = "btn btn-sm btn-warning pull-left", Style = "color:#222;margion-l
         colorTitle = "#00C851";
         Title = "Exito";
         Body = "Tarea eliminada con exito.";
+        <div class="modal fade" id="AlertModal">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header" style="background-color:@colorTitle;color:white">
+                        <h4 class="modal-title">@Title</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        @Body
+                    </div>
 
+                </div>
+            </div>
+        </div>
         <script type='text/javascript'>
             function openModal28() {
                 $('#AlertModal').modal('show');
@@ -530,24 +582,14 @@ new { @class = "btn btn-sm btn-warning pull-left", Style = "color:#222;margion-l
 
 }
 
-<div class="modal fade" id="AlertModal">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header" style="background-color:@colorTitle;color:white">
-                <h4 class="modal-title">@Title</h4>
-                <button type="button" class="close" data-dismiss="modal">&times;</button>
-            </div>
-            <div class="modal-body">
-                @Body
-            </div>
 
-        </div>
-    </div>
-</div>
-@{
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('.dfkgndjk option[value=@Session["PKUser"].ToString()]').attr('selected', 'selected');
+    });
+</script>
 
-    <script type="text/javascript">
-        openModal28();
-    </script>
 
-}
+
+
+

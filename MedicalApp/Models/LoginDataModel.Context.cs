@@ -28,6 +28,8 @@ namespace MedicalApp.Models
         public virtual DbSet<CT_Doctores> CT_Doctores { get; set; }
         public virtual DbSet<CT_Roles> CT_Roles { get; set; }
         public virtual DbSet<CT_Users> CT_Users { get; set; }
+        public virtual DbSet<sysdiagrams> sysdiagrams { get; set; }
         public virtual DbSet<Tareas> Tareas { get; set; }
+        public virtual DbSet<TareasProgramadas> TareasProgramadas { get; set; }
     }
 }

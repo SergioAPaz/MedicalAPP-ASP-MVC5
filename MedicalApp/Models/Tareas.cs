@@ -16,10 +16,10 @@ namespace MedicalApp.Models
     {
         public int id { get; set; }
         public Nullable<System.DateTime> Fecha { get; set; }
-        public Nullable<int> Asignador { get; set; }
+        public int Asignador { get; set; }
         public string TituloTarea { get; set; }
         public string Descripcion { get; set; }
-        public Nullable<int> Asignado { get; set; }
+        public int Asignado { get; set; }
         public Nullable<System.DateTime> FechaLimite { get; set; }
         public Nullable<int> Vencida { get; set; }
         public Nullable<int> Terminada { get; set; }

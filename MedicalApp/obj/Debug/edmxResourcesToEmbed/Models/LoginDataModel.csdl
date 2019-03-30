@@ -4,7 +4,9 @@
     <EntitySet Name="CT_Doctores" EntityType="MedicalAppModel.CT_Doctores" />
     <EntitySet Name="CT_Roles" EntityType="MedicalAppModel.CT_Roles" />
     <EntitySet Name="CT_Users" EntityType="MedicalAppModel.CT_Users" />
+    <EntitySet Name="sysdiagrams" EntityType="MedicalAppModel.sysdiagrams" />
     <EntitySet Name="Tareas" EntityType="MedicalAppModel.Tareas" />
+    <EntitySet Name="TareasProgramadas" EntityType="MedicalAppModel.TareasProgramadas" />
     <AssociationSet Name="FK_CT_Users_CT_Roles" Association="MedicalAppModel.FK_CT_Users_CT_Roles">
       <End Role="CT_Roles" EntitySet="CT_Roles" />
       <End Role="CT_Users" EntitySet="CT_Users" />
@@ -16,6 +18,14 @@
     <AssociationSet Name="FK_Tareas_CT_Users1" Association="MedicalAppModel.FK_Tareas_CT_Users1">
       <End Role="CT_Users" EntitySet="CT_Users" />
       <End Role="Tareas" EntitySet="Tareas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TareasProgramadas_CT_Users" Association="MedicalAppModel.FK_TareasProgramadas_CT_Users">
+      <End Role="CT_Users" EntitySet="CT_Users" />
+      <End Role="TareasProgramadas" EntitySet="TareasProgramadas" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TareasProgramadas_CT_Users1" Association="MedicalAppModel.FK_TareasProgramadas_CT_Users1">
+      <End Role="CT_Users" EntitySet="CT_Users" />
+      <End Role="TareasProgramadas" EntitySet="TareasProgramadas" />
     </AssociationSet>
   </EntityContainer>
   <EntityType Name="CT_Doctores">
@@ -47,6 +57,18 @@
     <NavigationProperty Name="CT_Roles" Relationship="MedicalAppModel.FK_CT_Users_CT_Roles" FromRole="CT_Users" ToRole="CT_Roles" />
     <NavigationProperty Name="Tareas" Relationship="MedicalAppModel.FK_Tareas_CT_Users" FromRole="CT_Users" ToRole="Tareas" />
     <NavigationProperty Name="Tareas1" Relationship="MedicalAppModel.FK_Tareas_CT_Users1" FromRole="CT_Users" ToRole="Tareas" />
+    <NavigationProperty Name="TareasProgramadas" Relationship="MedicalAppModel.FK_TareasProgramadas_CT_Users" FromRole="CT_Users" ToRole="TareasProgramadas" />
+    <NavigationProperty Name="TareasProgramadas1" Relationship="MedicalAppModel.FK_TareasProgramadas_CT_Users1" FromRole="CT_Users" ToRole="TareasProgramadas" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
   </EntityType>
   <EntityType Name="Tareas">
     <Key>
@@ -54,10 +76,10 @@
     </Key>
     <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Fecha" Type="DateTime" Precision="3" />
-    <Property Name="Asignador" Type="Int32" />
+    <Property Name="Asignador" Type="Int32" Nullable="false" />
     <Property Name="TituloTarea" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
     <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
-    <Property Name="Asignado" Type="Int32" />
+    <Property Name="Asignado" Type="Int32" Nullable="false" />
     <Property Name="FechaLimite" Type="DateTime" Precision="0" />
     <Property Name="Vencida" Type="Int32" />
     <Property Name="Terminada" Type="Int32" />
@@ -67,6 +89,22 @@
     <Property Name="EvidenciaDeCierreAdjunto" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="CT_Users" Relationship="MedicalAppModel.FK_Tareas_CT_Users" FromRole="Tareas" ToRole="CT_Users" />
     <NavigationProperty Name="CT_Users1" Relationship="MedicalAppModel.FK_Tareas_CT_Users1" FromRole="Tareas" ToRole="CT_Users" />
+  </EntityType>
+  <EntityType Name="TareasProgramadas">
+    <Key>
+      <PropertyRef Name="id" />
+    </Key>
+    <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="FechaDeCreacion" Type="DateTime" Precision="0" />
+    <Property Name="Asignador" Type="Int32" Nullable="false" />
+    <Property Name="TituloTarea" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Descripcion" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="Asignado" Type="Int32" Nullable="false" />
+    <Property Name="FechaDeProximoEvento" Type="DateTime" Precision="0" />
+    <Property Name="Frecuencia" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Finalizada" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="CT_Users" Relationship="MedicalAppModel.FK_TareasProgramadas_CT_Users" FromRole="TareasProgramadas" ToRole="CT_Users" />
+    <NavigationProperty Name="CT_Users1" Relationship="MedicalAppModel.FK_TareasProgramadas_CT_Users1" FromRole="TareasProgramadas" ToRole="CT_Users" />
   </EntityType>
   <Association Name="FK_CT_Users_CT_Roles">
     <End Type="MedicalAppModel.CT_Roles" Role="CT_Roles" Multiplicity="1" />
@@ -81,7 +119,7 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Tareas_CT_Users">
-    <End Type="MedicalAppModel.CT_Users" Role="CT_Users" Multiplicity="0..1" />
+    <End Type="MedicalAppModel.CT_Users" Role="CT_Users" Multiplicity="1" />
     <End Type="MedicalAppModel.Tareas" Role="Tareas" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CT_Users">
@@ -93,13 +131,37 @@
     </ReferentialConstraint>
   </Association>
   <Association Name="FK_Tareas_CT_Users1">
-    <End Type="MedicalAppModel.CT_Users" Role="CT_Users" Multiplicity="0..1" />
+    <End Type="MedicalAppModel.CT_Users" Role="CT_Users" Multiplicity="1" />
     <End Type="MedicalAppModel.Tareas" Role="Tareas" Multiplicity="*" />
     <ReferentialConstraint>
       <Principal Role="CT_Users">
         <PropertyRef Name="id" />
       </Principal>
       <Dependent Role="Tareas">
+        <PropertyRef Name="Asignador" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TareasProgramadas_CT_Users">
+    <End Type="MedicalAppModel.CT_Users" Role="CT_Users" Multiplicity="1" />
+    <End Type="MedicalAppModel.TareasProgramadas" Role="TareasProgramadas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CT_Users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="TareasProgramadas">
+        <PropertyRef Name="Asignador" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TareasProgramadas_CT_Users1">
+    <End Type="MedicalAppModel.CT_Users" Role="CT_Users" Multiplicity="1" />
+    <End Type="MedicalAppModel.TareasProgramadas" Role="TareasProgramadas" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="CT_Users">
+        <PropertyRef Name="id" />
+      </Principal>
+      <Dependent Role="TareasProgramadas">
         <PropertyRef Name="Asignador" />
       </Dependent>
     </ReferentialConstraint>

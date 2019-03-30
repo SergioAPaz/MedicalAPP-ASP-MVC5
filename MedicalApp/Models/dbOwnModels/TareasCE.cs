@@ -11,14 +11,14 @@ namespace MedicalApp.Models.dbOwnModels
 
         public int id { get; set; }
         public Nullable<System.DateTime> Fecha { get; set; }
-        public Nullable<int> Asignador { get; set; }
+        public int Asignador { get; set; }
         [Required]
         public string TituloTarea { get; set; }
 
         [DataType(DataType.MultilineText)]
         [Required]
         public string Descripcion { get; set; }
-        public Nullable<int> Asignado { get; set; }
+        public int Asignado { get; set; }
 
         [Required]
         public Nullable<System.DateTime> FechaLimite { get; set; }
