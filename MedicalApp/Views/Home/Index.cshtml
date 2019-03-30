@@ -30,6 +30,32 @@
         $('.date-picker3').datepicker({ dateFormat: 'yy/mm/dd' }).val();
     })
 
+    $(document).ready(function () {
+        document.getElementById("txtDateUnSoloEvento").disabled = true;
+        document.getElementById("txtDateRecurrente").disabled = true;
+        document.getElementById("TareasProgramadasFC_FrecuenciaRecurrencia").disabled = true;
+    });
+
+    function slctRecurrencia(sel) {
+        var e = document.getElementById("TareasProgramadasFC_FrecuenciaEventos");
+        var strUser = e.options[e.selectedIndex].text;
+        if (strUser == "Un solo evento") {
+            document.getElementById("txtDateUnSoloEvento").disabled = false;
+            document.getElementById("txtDateRecurrente").disabled = true;
+            document.getElementById("TareasProgramadasFC_FrecuenciaRecurrencia").disabled = true;
+            document.getElementById("txtDateRecurrente").value = "";
+        } else if (strUser == "Recurrente") {
+            document.getElementById("TareasProgramadasFC_FrecuenciaRecurrencia").disabled = false;
+            document.getElementById("txtDateRecurrente").disabled = false;
+            document.getElementById("txtDateUnSoloEvento").disabled = true;
+            document.getElementById("txtDateUnSoloEvento").value = "";
+
+        } else {
+            document.getElementById("txtDateUnSoloEvento").disabled = true;
+            document.getElementById("txtDateRecurrente").disabled = true;
+            document.getElementById("TareasProgramadasFC_FrecuenciaRecurrencia").disabled = true;
+        }
+    }
 </script>
 
 
@@ -395,13 +421,12 @@ new { @class = "btn btn-sm btn-warning pull-left", Style = "color:#222;margion-l
                         <div class="col-6">
                             <label>Frecuencia:</label>
                             <br />
-                            <select class="form-control" style="width:370px">
-                                <option value="Sin seleccion">Sin seleccion</option>
-                                <option value="Un solo evento">Un solo evento</option>
-                                <option value="Recurrente">Recurrente</option>
-                            </select>
-
-
+                            @Html.DropDownListFor(model => model.TareasProgramadasFC.FrecuenciaEventos, new SelectList(
+                              new List<Object>{
+                                   new { value = "Sin selección" , text = "Sin selección"  },
+                                   new { value = "Un solo evento" , text = "Un solo evento"  },
+                                   new { value = "Recurrente" , text = "Recurrente" }
+                                },"value","text",2), htmlAttributes: new { @class = "form-control", onchange="slctRecurrencia(this);" })
                         </div>
                         <br /><br />
                         <div class="col-sm-6" style="margin-bottom: 10px;border:1px solid #42A5F5;max-width: 375px;margin-left: 15px;;padding: 0;border-radius: 3px;margin-top:15px">
@@ -413,7 +438,7 @@ new { @class = "btn btn-sm btn-warning pull-left", Style = "color:#222;margion-l
                             <div style="width: 100%;">
                                 <div style="display:flex; flex-direction: row; justify-content: center; align-items: center;margin-top: 22px;margin-left:-25px">
                                     <label style="margin-left: 20px;margin-top: 9px;padding-right:10px">Fecha:</label><br /><br />
-                                    @Html.EditorFor(model => model.TareasProgramadasFC.FechaDeProximoEvento, new { htmlAttributes = new { @class = "form-control date-picker2", autocomplete = "off", @style = "width:190px", id = "txtDateUnSoloEvento" } })
+                                    @Html.EditorFor(model => model.TareasProgramadasFC.FechaDeProximoEventoJustOneEvent, new { htmlAttributes = new { @class = "form-control date-picker2", autocomplete = "off", @style = "width:190px", id = "txtDateUnSoloEvento" } })
 
 
                                 </div>
@@ -434,7 +459,7 @@ new { @class = "btn btn-sm btn-warning pull-left", Style = "color:#222;margion-l
                             <div style="width: 100%;">
                                 <div style="display:flex; flex-direction: row; justify-content: center; align-items: center">
                                     <label style="margin-left: 12px;margin-top: 9px;text-align:center;padding-right:19px">Fecha <br /> de inicio:</label>
-                                    @Html.EditorFor(model => model.TareasProgramadasFC.FechaDeProximoEvento, new { htmlAttributes = new { @class = "form-control date-picker3", autocomplete = "off", @style = "width:229px", id = "txtDateRecurrente" } })
+                                    @Html.EditorFor(model => model.TareasProgramadasFC.FechaDeProximoEventoMultipleEvents, new { htmlAttributes = new { @class = "form-control date-picker3", autocomplete = "off", @style = "width:229px", id = "txtDateRecurrente" } })
 
 
                                     <br>
@@ -442,14 +467,16 @@ new { @class = "btn btn-sm btn-warning pull-left", Style = "color:#222;margion-l
 
                                 <div style="display:flex; flex-direction: row; justify-content: center; align-items: center;margin-top: 5px">
                                     <label style="margin-left: 0px;margin-top: 9px;margin-right: 10px">Recurrencia:</label>
-                                    <select name="PeriodicidadProgramada" class="form-control" id="PeriodicidadProgramada" style="width: 230px">
-                                        <option value="nada">Sin selección</option>
-                                        <option value="Diaria">Diaria</option>
-                                        <option value="Semanal">Semanal</option>
-                                        <option value="Quincenal">Quincenal</option>
-                                        <option value="Mensual">Mensual</option>
-                                        <option value="Anual">Anual</option>
-                                    </select>
+                                   
+                                    @Html.DropDownListFor(model => model.TareasProgramadasFC.FrecuenciaRecurrencia, new SelectList(
+                              new List<Object>{
+                                   new { value = "Sin selección" , text = "Sin selección"  },
+                                   new { value = "Diaria" , text = "Diaria"  },
+                                   new { value = "Semanal" , text = "Semanal" },
+                                   new { value = "Quincenal" , text = "Quincenal" },
+                                   new { value = "Mensual" , text = "Mensual" },
+                                   new { value = "Anual" , text = "Anual" },
+                                }, "value", "text", 2), htmlAttributes: new { @class = "form-control" })
                                     <br>
                                 </div>
                             </div>

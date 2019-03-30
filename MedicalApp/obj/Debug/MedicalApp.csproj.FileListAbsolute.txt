@@ -266,4 +266,3 @@ E:\MyMega\MisDesarrrollos\Medical\MedicalApp\bin\System.Web.WebPages.Deployment.
 E:\MyMega\MisDesarrrollos\Medical\MedicalApp\bin\System.Web.WebPages.Razor.xml
 E:\MyMega\MisDesarrrollos\Medical\MedicalApp\obj\Debug\MedicalApp.dll
 E:\MyMega\MisDesarrrollos\Medical\MedicalApp\obj\Debug\MedicalApp.pdb
-E:\MyMega\MisDesarrrollos\Medical\MedicalApp\obj\Debug\MedicalApp.csprojResolveAssemblyReference.cache

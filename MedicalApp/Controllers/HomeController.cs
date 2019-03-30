@@ -25,7 +25,7 @@ namespace MedicalApp.Controllers
         {
             ViewBag.Asignado = new SelectList(db.CT_Users, "id", "Name");
             ViewBag.Asignador = new SelectList(db.CT_Users, "id", "UserName");
-            
+
             ViewModel mymodel = new ViewModel();
             if (Session["FullUserName"] != null)
             {
@@ -37,7 +37,7 @@ namespace MedicalApp.Controllers
             {
                 return RedirectToAction("Index", "Login");
             }
-          
+
 
             mymodel.TareasIE = db.Tareas.Include(c => c.CT_Users);
             return View(mymodel);
@@ -63,7 +63,7 @@ namespace MedicalApp.Controllers
             return View();
         }
 
-       
+
         public ActionResult Delete(int? id)
         {
             if (id != null)
@@ -71,7 +71,7 @@ namespace MedicalApp.Controllers
                 Tareas TTareas = db.Tareas.Find(id);
                 db.Tareas.Remove(TTareas);
                 db.SaveChanges();
-                
+
             }
             TempData["ShowModal1"] = "TareaEliminada";
             return RedirectToAction("Index");
@@ -80,7 +80,7 @@ namespace MedicalApp.Controllers
 
 
 
-        
+
         public ActionResult Downloads(string Adjunto)
         {
             string filename = Convert.ToString(Adjunto);
@@ -106,8 +106,8 @@ namespace MedicalApp.Controllers
             {
                 //Se pasan los campos de uno por uno a la tabla Tareas de SQL debido a que los datos provienen de un ViewModel(ClaseAuxiliar) para poder modificar 
                 //el modelo sin que se pierdan los cambios al recrear la base de datos
-                string FileExtension="Empty";
-                long FileName2=0;
+                string FileExtension = "Empty";
+                long FileName2 = 0;
                 bool ExisteArchivo = false;
                 try
                 {
@@ -120,16 +120,16 @@ namespace MedicalApp.Controllers
                         file.SaveAs(path);
                         ExisteArchivo = true;
                     }
-                    
+
                 }
-                catch (Exception )
+                catch (Exception)
                 {
 
                 }
-                
+
                 try
                 {
-                    if (ExisteArchivo==true)
+                    if (ExisteArchivo == true)
                     {
                         db.Tareas.Add(new Tareas
                         {
@@ -155,7 +155,7 @@ namespace MedicalApp.Controllers
                             Adjunto = tareaf.TareasFC.Adjunto,
                         });
                     }
-                    
+
 
                     db.SaveChanges();
                     TempData["ShowModal1"] = "Exito";
@@ -168,7 +168,7 @@ namespace MedicalApp.Controllers
                     SendErrorEmail(ex.ToString());
                     return RedirectToAction("Index");
                 }
-                
+
             }
             else
             {
@@ -191,22 +191,36 @@ namespace MedicalApp.Controllers
                 //el modelo sin que se pierdan los cambios al recrear la base de datos
                 string FileExtension = "Empty";
                 long FileName2 = 0;
-              
+
 
                 try
                 {
-                   
-                        db.TareasProgramadas.Add(new TareasProgramadas
-                        {
-                            FechaDeCreacion = DateTime.Now,
-                            Asignador = tareaf.TareasProgramadasFC.Asignador,
-                            TituloTarea = tareaf.TareasProgramadasFC.TituloTarea,
-                            Descripcion = tareaf.TareasProgramadasFC.Descripcion,
-                            Asignado = tareaf.TareasFC.Asignado,
-                            FechaDeProximoEvento = tareaf.TareasFC.FechaLimite,
-                        });
-                    
-                    
+                    string FrecuenciaVar;
+                    DateTime FechaInicio;
+                    if (tareaf.TareasProgramadasFC.FrecuenciaEventos == "Un solo evento")
+                    {
+                        FechaInicio = tareaf.TareasProgramadasFC.FechaDeProximoEventoJustOneEvent;
+                        FrecuenciaVar = "Un solo evento";
+                    }
+                    else
+                    {
+                        FechaInicio = tareaf.TareasProgramadasFC.FechaDeProximoEventoMultipleEvents;
+                        FrecuenciaVar = tareaf.TareasProgramadasFC.FrecuenciaRecurrencia;
+                    }
+
+                    db.TareasProgramadas.Add(new TareasProgramadas
+                    {
+                        FechaDeCreacion = DateTime.Now,
+                        Asignador = tareaf.TareasProgramadasFC.Asignador,
+                        TituloTarea = tareaf.TareasProgramadasFC.TituloTarea,
+                        Descripcion = tareaf.TareasProgramadasFC.Descripcion,
+                        Asignado = tareaf.TareasProgramadasFC.Asignado,
+                        FechaDeProximoEvento = FechaInicio,
+                        Frecuencia = FrecuenciaVar,
+                        Finalizada="No",
+                    });
+
+
 
 
                     db.SaveChanges();
@@ -244,13 +258,13 @@ namespace MedicalApp.Controllers
             message.IsBodyHtml = true;
             message.BodyEncoding = Encoding.UTF8;
             message.Subject = "subject";
-            message.Body = "Error: "+Error+"";
+            message.Body = "Error: " + Error + "";
 
             System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient();
             client.Send(message);
         }
 
-        
+
 
 
 

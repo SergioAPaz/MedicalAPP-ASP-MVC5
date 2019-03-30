@@ -13,8 +13,10 @@ namespace MedicalApp.Models.dbOwnModels
         public string TituloTarea { get; set; }
         public string Descripcion { get; set; }
         public int Asignado { get; set; }
-        public Nullable<System.DateTime> FechaDeProximoEvento { get; set; }
-        public string Frecuencia { get; set; }
+        public System.DateTime FechaDeProximoEventoJustOneEvent { get; set; }
+        public System.DateTime FechaDeProximoEventoMultipleEvents { get; set; }
+        public string FrecuenciaEventos { get; set; }
+        public string FrecuenciaRecurrencia { get; set; }
         public string Finalizada { get; set; }
 
         public virtual CT_Users CT_Users { get; set; }
