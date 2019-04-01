@@ -1836,6 +1836,7 @@
     <Content Include="Content\Assets\FontAwesome\fontawesome\webfonts\fa-brands-400.svg" />
     <Content Include="Content\Assets\FontAwesome\fontawesome\webfonts\fa-regular-400.svg" />
     <Content Include="Content\Assets\FontAwesome\fontawesome\webfonts\fa-solid-900.svg" />
+    <Content Include="Content\Assets\images\doodles.png" />
     <Content Include="Content\Assets\images\logo.png" />
     <Content Include="Content\Assets\images\tasklogo.png" />
     <Content Include="Content\Assets\images\user.png" />

@@ -11,7 +11,7 @@ namespace MedicalApp.Models.dbOwnModels
         public TareasCE TareasFC { get; set; }
         public TareasProgramadasCE TareasProgramadasFC { get; set; }
         public IEnumerable<MedicalApp.Models.Tareas> TareasIE { get; set; }
-
+        public IEnumerable<MedicalApp.Models.TareasProgramadas> TareasProgramadasIE { get; set; }
         public string FulluserName { get; set; }
         public string UserName { get; set; }
         public string PkUser { get; set; }

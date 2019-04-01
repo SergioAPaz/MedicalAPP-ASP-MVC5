@@ -40,6 +40,7 @@ namespace MedicalApp.Controllers
 
 
             mymodel.TareasIE = db.Tareas.Include(c => c.CT_Users);
+            mymodel.TareasProgramadasIE = db.TareasProgramadas.Include(c => c.CT_Users);
             return View(mymodel);
 
             //ViewBag.Rol = new SelectList(db.CT_Roles, "id", "Role");
@@ -77,7 +78,20 @@ namespace MedicalApp.Controllers
             return RedirectToAction("Index");
 
         }
+        public ActionResult DeleteProgrammed(int? id)
+        {
+            if (id != null)
+            {
+                TareasProgramadas TTareas = db.TareasProgramadas.Find(id);
+                db.TareasProgramadas.Remove(TTareas);
+                db.SaveChanges();
 
+            }
+            TempData["ShowModal1"] = "TareaEliminada";
+            return RedirectToAction("Index");
+
+        }
+        
 
 
 

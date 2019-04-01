@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -10,7 +11,11 @@ namespace MedicalApp.Models.dbOwnModels
         public int id { get; set; }
         public Nullable<System.DateTime> FechaDeCreacion { get; set; }
         public int Asignador { get; set; }
+        [Required]
         public string TituloTarea { get; set; }
+
+        [DataType(DataType.MultilineText)]
+        [Required]
         public string Descripcion { get; set; }
         public int Asignado { get; set; }
         public System.DateTime FechaDeProximoEventoJustOneEvent { get; set; }

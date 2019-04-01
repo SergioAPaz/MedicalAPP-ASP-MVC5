@@ -1,33 +1,29 @@
 ﻿@model MedicalApp.Models.dbOwnModels.ViewModel
 @{
-    @Styles.Render("~/Content/css")
-    @Scripts.Render("~/bundles/jquery")
-    @Scripts.Render("~/bundles/bootstrap")
-    @Styles.Render("~/Content/css2")
+   
 
     ViewBag.Title = "Tasks";
 
     @Html.Raw(TempData["msg"])
 }
 
-<link href="http://code.jquery.com/ui/1.10.4/themes/smoothness/jquery-ui.min.css" rel="stylesheet" type="text/css" />
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-<script src="http://code.jquery.com/ui/1.10.4/jquery-ui.min.js"></script>
 
-<script src="~/Scripts/bootstrap.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+<link href="~/Content/bootstrap-datepicker.min.css" rel="stylesheet" />
 
+<script src="~/Scripts/bootstrap-datepicker.min.js"></script>
 
-
-<link href="~/Content/bootstrap.min.css" rel="stylesheet" />
 <script type='text/javascript'>
     $(function () {
-        $('.date-picker1').datepicker({ dateFormat: 'yy/mm/dd' }).val();
+        $('.datepicker').datepicker();
     })
     $(function () {
-        $('.date-picker2').datepicker({ dateFormat: 'yy/mm/dd' }).val();
+        $('.date-picker2').datepicker();
     })
     $(function () {
-        $('.date-picker3').datepicker({ dateFormat: 'yy/mm/dd' }).val();
+        $('.date-picker3').datepicker();
     })
 
     $(document).ready(function () {
@@ -73,7 +69,7 @@
 </script>
 
 
-<div class="alert alert-info" style="margin-top:15px;text-align:center">
+<div class="alert alert-info" style="margin-top:15px;text-align:center;background-color:#D1ECF1">
     <h3>Gestión de tareas</h3>
 </div>
 
@@ -88,7 +84,7 @@
     <div id="accordion">
 
         <div class="card">
-            <div class="card-header">
+            <div class="card-header" style="background-color:#D1ECF1">
                 <a class="card-link" data-toggle="collapse" href="#collapseOne">
                     Mis tareas pendientes
                 </a>
@@ -101,7 +97,7 @@
                         <thead style="background-color:dodgerblue;color:white">
                             <tr>
                                 <th>Folio</th>
-                                <th>Fecha</th>
+                                <th style="min-width:150px">Fecha</th>
                                 <th>Asignador</th>
                                 <th>TituloTarea</th>
                                 <th>Descripcion</th>
@@ -164,7 +160,7 @@ new { @class = "btn btn-sm btn-warning pull-left", Style = "color:#222;margion-l
         </div>
 
         <div class="card">
-            <div class="card-header">
+            <div class="card-header" style="background-color:#D1ECF1">
                 <a class="collapsed card-link" data-toggle="collapse" href="#collapseTwo">
                     Tareas que he asignado a otros usuarios
                 </a>
@@ -238,14 +234,75 @@ new { @class = "btn btn-sm btn-warning pull-left", Style = "color:#222;margion-l
         </div>
 
         <div class="card">
-            <div class="card-header">
+            <div class="card-header" style="background-color:#D1ECF1">
                 <a class="collapsed card-link" data-toggle="collapse" href="#collapseThree">
                     Tareas programadas
                 </a>
             </div>
             <div id="collapseThree" class="collapse">
                 <div class="card-body">
-                    Lorem ipsum..
+                    
+                    <table class="table table-hover table-bordered table-condensed alex">
+                        <thead style="background-color:dodgerblue;color:white">
+                            <tr>
+                                <th>Folio</th>
+                                <th>Fecha</th>
+                                <th>Asignador</th>
+                                <th>TituloTarea</th>
+                                <th>Descripcion</th>
+                                <th>Asignado</th>
+                                <th>FechaLimite</th>
+                                <th>Vencida</th>
+                                <th>Adjunto</th>
+                                <th>Acciones</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.TareasProgramadasIE.Where(x => x.Asignador == Convert.ToInt32(Model.PkUser) ))
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.id)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.FechaDeCreacion)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CT_Users1.UserName)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.TituloTarea)
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Descripcion)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.CT_Users.UserName)
+                                    </td>
+                                    <td>
+                                        @item.FechaDeProximoEvento.Value.ToString("MM/dd/yyyy")
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Frecuencia)
+                                    </td>
+
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Finalizada)
+                                    </td>
+
+                                    <td style="width:10px">
+                                        @Html.ActionLink("Eliminar", "DeleteProgrammed", "Home", new { id = item.id },
+new { @class = "btn btn-sm btn-warning pull-left", Style = "color:#222;margion-left:-50px", onclick = "return confirm('Esta seguro de eliminar esta tarea?');" })
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+
+                    </table>
+
+
+
                 </div>
             </div>
         </div>
@@ -312,7 +369,7 @@ new { @class = "btn btn-sm btn-warning pull-left", Style = "color:#222;margion-l
                             @Html.EditorFor(model => model.TareasFC.TituloTarea, new { htmlAttributes = new { @class = "form-control" } })
                         </div>
                         <div class="col-12" style="margin-bottom:15px">
-                            <label style="margin-top:5px">Descripcion</label>
+                            <label style="margin-top:5px">Descrripcion</label>
                             <br />
                             @Html.EditorFor(model => model.TareasFC.Descripcion, new { htmlAttributes = new { @class = "form-control" } })
                         </div>
@@ -332,7 +389,7 @@ new { @class = "btn btn-sm btn-warning pull-left", Style = "color:#222;margion-l
                         <div class="col-6">
                             <label>Fecha limite</label>
                             <br />
-                            @Html.EditorFor(model => model.TareasFC.FechaLimite, new { htmlAttributes = new { @class = "form-control date-picker1", autocomplete = "off" } })
+                            @Html.EditorFor(model => model.TareasFC.FechaLimite, new { htmlAttributes = new { @class = "form-control datepicker", autocomplete = "off" } })
                         </div>
                         <div class="col-12" style="margin-top:25px">
                             <label for="file">Adjunto:</label>
@@ -476,7 +533,7 @@ new { @class = "btn btn-sm btn-warning pull-left", Style = "color:#222;margion-l
                                    new { value = "Quincenal" , text = "Quincenal" },
                                    new { value = "Mensual" , text = "Mensual" },
                                    new { value = "Anual" , text = "Anual" },
-                                }, "value", "text", 2), htmlAttributes: new { @class = "form-control" })
+                                }, "value", "text", 2), htmlAttributes: new { @class = "form-control", @style="width:230px" })
                                     <br>
                                 </div>
                             </div>
